@@ -6,7 +6,7 @@ CC      = gcc
 CF      = -Wall -Wextra -Werror -I include -L lib -l ft -l fs
 
 SRC     = main.c
-SRC     = $(addprefix src/,$(SRC))
+SRC    := $(addprefix src/,$(SRC))
 
 .PHONY: all
 all: bin/$(NAME)
