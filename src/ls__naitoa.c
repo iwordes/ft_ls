@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_human_readable.c                                :+:      :+:    :+:   */
+/*   ls__naitoa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 12:20:16 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/03 14:36:11 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/05 14:33:36 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 14:38:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_human_readable(t_ls *config)
+/*
+** Non-Allocating Integer to ASCII
+*/
+
+void	ls__naitoa(char buff[20], uintmax_t num)
 {
-	config->hr_size = TRUE;
+	int		i;
+
+	i = ft_uintlen(num);
+	buff[i] = 0;
+	while (TRUE)
+	{
+		buff[(i -= 1)] = '0' + (num % 10);
+		if ((num /= 10) == 0)
+			break ;
+	}
 }

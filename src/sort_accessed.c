@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_sort_accessed.c                                 :+:      :+:    :+:   */
+/*   sort_accessed.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 13:07:39 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 12:18:11 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/05 10:28:01 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 10:39:43 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_sort_accessed(t_ls *config)
+/*
+** Sort by time of last access.
+*/
+
+int		sort_accessed(t_ent *e1, t_ent *e2)
 {
-	config->order = accessed;
-	config->time = accessed;
+	if (e1->info.st_atimespec.tv_sec != e2->info.st_atimespec.tv_sec)
+		return (e1->info.st_atimespec.tv_sec - e2->info.st_atimespec.tv_sec);
+	return (e1->info.st_atimespec.tv_nsec - e2->info.st_atimespec.tv_nsec);
 }

@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_sort_accessed.c                                 :+:      :+:    :+:   */
+/*   ls_fmt_group.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 13:07:39 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 12:18:11 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/05 13:15:54 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 14:59:09 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_sort_accessed(t_ls *config)
+const char	*ls_fmt_group(gid_t gid)
 {
-	config->order = accessed;
-	config->time = accessed;
+	static char		buffer[20];
+	struct group	*group;
+
+	if ((group = getgrgid(gid)) != NULL)
+		return (group->gr_name);
+	ls__naitoa(buffer, gid);
+	return (buffer);
 }

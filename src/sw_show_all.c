@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_sort_accessed.c                                 :+:      :+:    :+:   */
+/*   sw_show_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 13:07:39 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 12:18:11 by iwordes          ###   ########.fr       */
+/*   Created: 2016/12/04 12:35:26 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 14:29:01 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_sort_accessed(t_ls *config)
+/*
+** Show all files beginning with a dot, including "." and "..".
+*/
+
+void	sw_show_all(t_ls *config)
 {
-	config->order = accessed;
-	config->time = accessed;
+	config->show_all = TRUE;
+	config->show_hidden = TRUE;
 }

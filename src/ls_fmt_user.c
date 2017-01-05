@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_sort_created.c                                  :+:      :+:    :+:   */
+/*   ls_fmt_user.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 13:08:53 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/03 14:37:35 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/05 13:04:53 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 15:02:06 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_sort_created(t_ls *config)
+const char	*ls_fmt_user(uid_t uid)
 {
-	config->order = crt;
-	config->time = crt;
+	static char		buffer[20];
+	struct passwd	*pwd;
+
+	if ((pwd = getpwuid(uid)) != NULL)
+		return (pwd->pw_name);
+	ls__naitoa(buffer, uid);
+	return (buffer);
 }

@@ -6,21 +6,21 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 09:51:22 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/03 18:21:13 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 15:02:51 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 static char	*g_swc =
-	"AR" "lrt";
+	"AR" "alrt";
 
 static void	(*g_swf[])(t_ls*) =
 {
 	sw_show_hidden,
 	sw_recursive,
 
-	sw_show_dot,
+	sw_show_all,
 	sw_long_format,
 	sw_sort_reverse,
 	sw_sort_modified,
@@ -36,10 +36,6 @@ char		ls_parse_switch(char sw, t_ls *config)
 		i++;
 	if (g_swc[i] == 0 || g_swf[i] == NULL)
 		return (FALSE);
-
-	// DEBUG
-	printf("%c", sw);
-
 	g_swf[i](config);
 	return (TRUE);
 }

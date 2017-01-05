@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_sort_accessed.c                                 :+:      :+:    :+:   */
+/*   sort_name.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 13:07:39 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 12:18:11 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/05 10:23:24 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 10:27:48 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_sort_accessed(t_ls *config)
+/*
+** Sort by ASCII name.
+*/
+
+int		sort_name(t_ent *ent1, t_ent *ent2)
 {
-	config->order = accessed;
-	config->time = accessed;
+	return (ft_strcmp(ent1->name, ent2->name));
 }
