@@ -1,14 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/01 12:53:45 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/04 19:53:34 by iwordes          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <ft_ls.h>
 
-int			main(int argc, char **argv)
-{
-	t_ls	args;
+char	*g_name;
 
-	if (argc == 1)
-		ls_list(".", args);
+int		main(int argc, char **argv)
+{
+	t_ls			config;
+	int				tgt_cnt;
+	char			**targets;
+
+	g_name = argv[0];
+	ls_init_config(&config);
+	ls_parse_args(argc, argv, &config);
+	ls_parse_targets(argc, argv, &tgt_cnt, &targets);
+
+	// NOTE TODO: DEBUG
+	printf("\e[1;96mTargets: \e[0m");
+	for (int i = 0; i < tgt_cnt; i++)
+		printf("\"%s\" ", targets[i]);
+	printf("\n");
+
+	if (tgt_cnt == 0)
+		ls_list(".", &config);
+	/*
 	else
 	{
-		// TODO: Parse arguments.
-		// TODO: List each non-argument's contents, or itself.
+		if (tgt_cnt > 1)
+			config->multiple_targets = TRUE;
+		ls_list_targets(targets, tgt_cnt, &config);
 	}
+	*/
+	return (0);
 }
