@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:12:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:59:10 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:05:11 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ static int		(*g_sort[])(t_ent*, t_ent*) =
 	sort_name,
 	sort_size,
 	sort_accessed,
-	sort_changed,
+	sort_created,
 	sort_modified
-}
+};
 
 /*
 ** Sort a NULL-terminated array of t_ent* by the method specified.

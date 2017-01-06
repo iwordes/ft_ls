@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 13:05:44 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 12:19:51 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:05:22 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	sw_sort_modified(t_ls *config)
 {
-	if (config->order != accessed && config->order != changed)
+	if (config->order != accessed && config->order != created)
 		config->order = modified;
 }

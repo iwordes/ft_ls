@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 13:08:53 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:54:20 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:07:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	sw_sort_created(t_ls *config)
 {
 	config->order = created;
-	config->time = created;
+	config->time = crt;
 }

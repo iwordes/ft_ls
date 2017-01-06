@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:56:07 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:07:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 
 typedef enum	e_acm
 {
+	mod,
 	acc,
-	chn,
-	mod
+	crt
 }				t_acm;
 
 typedef enum	e_order
@@ -100,16 +100,20 @@ void				ls_table_print(t_ent **ent, t_ls *conf);
 void				err_illegal_opt(const char *bin, char opt);
 
 int					sort_accessed(t_ent *ent1, t_ent *ent2);
-int					sort_changed(t_ent *ent1, t_ent *ent2);
+int					sort_created(t_ent *ent1, t_ent *ent2);
 int					sort_modified(t_ent *ent1, t_ent *ent2);
 int					sort_name(t_ent *ent1, t_ent *ent2);
+int					sort_size(t_ent *ent1, t_ent *ent2);
 
 void				sw_show_all(t_ls *config);
 void				sw_show_hidden(t_ls *config);
 void				sw_show_inode(t_ls *config);
 void				sw_long_format(t_ls *config);
 void				sw_recursive(t_ls *config);
+void				sw_sort_accessed(t_ls *config);
+void				sw_sort_created(t_ls *config);
 void				sw_sort_reverse(t_ls *config);
+void				sw_sort_size(t_ls *config);
 void				sw_sort_modified(t_ls *config);
 
 extern char			*g_name;
