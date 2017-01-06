@@ -6,13 +6,13 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 14:19:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 20:40:57 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 09:46:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-static void	_type(mode_t mode, char buffer[11])
+static void	type_(mode_t mode, char buffer[11])
 {
 	if (S_ISREG(mode))
 		buffer[0] = '-';
@@ -32,7 +32,7 @@ static void	_type(mode_t mode, char buffer[11])
 		buffer[0] = '?';
 }
 
-static void	_owner(mode_t mode, char buffer[11])
+static void	owner_(mode_t mode, char buffer[11])
 {
 	buffer[1] = (mode & 0400) ? 'r' : '-';
 	buffer[2] = (mode & 0200) ? 'w' : '-';
@@ -42,7 +42,7 @@ static void	_owner(mode_t mode, char buffer[11])
 		buffer[3] = (mode & 0100) ? 'x' : '-';
 }
 
-static void	_group(mode_t mode, char buffer[11])
+static void	group_(mode_t mode, char buffer[11])
 {
 	buffer[4] = (mode & 0040) ? 'r' : '-';
 	buffer[5] = (mode & 0020) ? 'w' : '-';
@@ -52,7 +52,7 @@ static void	_group(mode_t mode, char buffer[11])
 		buffer[6] = (mode & 0010) ? 'x' : '-';
 }
 
-static void	_other(mode_t mode, char buffer[11])
+static void	other_(mode_t mode, char buffer[11])
 {
 	buffer[7] = (mode & 0004) ? 'r' : '-';
 	buffer[8] = (mode & 0002) ? 'w' : '-';
@@ -66,10 +66,10 @@ const char	*ls_fmt_mode(t_ent *ent)
 {
 	static char	buffer[12];
 
-	_type(ent->info.st_mode, buffer);
-	_owner(ent->info.st_mode, buffer);
-	_group(ent->info.st_mode, buffer);
-	_other(ent->info.st_mode, buffer);
-	buffer[11] = (ent->has_xattr) ? '@' : 0;
+	type_(ent->info.st_mode, buffer);
+	owner_(ent->info.st_mode, buffer);
+	group_(ent->info.st_mode, buffer);
+	other_(ent->info.st_mode, buffer);
+	buffer[10] = (ent->has_xattr) ? '@' : 0;
 	return (buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 21:05:02 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 10:08:15 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef enum	e_order
 
 typedef struct		s_lspad
 {
+	unsigned		inode;
+	unsigned		mode;
 	unsigned		user;
 	unsigned		group;
 	unsigned		size;

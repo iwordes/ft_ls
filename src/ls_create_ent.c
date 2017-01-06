@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:34:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 21:03:56 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 09:22:18 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_ent	*ls_create_ent(const char *path, char *child)
 	}
 	else
 		ent->name = child;
-	ent->has_xattr = (listxattr(path, NULL, 0, 0) > 0);
+	ent->has_xattr = (listxattr(qual_path, NULL, 0, 0) > 0);
 	free(qual_path);
 	return (ent);
 }
