@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 14:19:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:47:09 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 20:40:57 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ static void	_other(mode_t mode, char buffer[11])
 		buffer[9] = (mode & 0001) ? 'x' : '-';
 }
 
-const char	*ls_fmt_mode(mode_t mode)
+const char	*ls_fmt_mode(t_ent *ent)
 {
-	static char	buffer[11];
+	static char	buffer[12];
 
-	_type(mode, buffer);
-	_owner(mode, buffer);
-	_group(mode, buffer);
-	_other(mode, buffer);
+	_type(ent->info.st_mode, buffer);
+	_owner(ent->info.st_mode, buffer);
+	_group(ent->info.st_mode, buffer);
+	_other(ent->info.st_mode, buffer);
+	buffer[11] = (ent->has_xattr) ? '@' : 0;
 	return (buffer);
 }

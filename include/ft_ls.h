@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 18:19:47 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 21:05:02 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <grp.h>
 # include <pwd.h>
 # include <sys/stat.h>
+# include <sys/xattr.h>
 
 # include <libfs.h>
 # include <libft.h>
@@ -59,6 +60,7 @@ typedef struct		s_ent
 {
 	char			*name;
 	struct stat		info;
+	char			has_xattr;
 }					t_ent;
 
 typedef struct		s_ls
@@ -81,7 +83,7 @@ void				ls__naitoa(char buffer[20], uintmax_t integer);
 
 const char			*ls_fmt_group(gid_t gid);
 const char			*ls_fmt_inode(ino_t inode);
-const char			*ls_fmt_mode(mode_t mode);
+const char			*ls_fmt_mode(t_ent *ent);
 const char			*ls_fmt_size(off_t size);
 const char			*ls_fmt_user(uid_t uid);
 
