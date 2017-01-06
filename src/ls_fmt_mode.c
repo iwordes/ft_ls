@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 14:19:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 09:46:14 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 15:17:13 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	owner_(mode_t mode, char buffer[11])
 {
 	buffer[1] = (mode & 0400) ? 'r' : '-';
 	buffer[2] = (mode & 0200) ? 'w' : '-';
-	if (mode & 01000)
+	if (mode & 04000)
 		buffer[3] = (mode & 0100) ? 's' : 'S';
 	else
 		buffer[3] = (mode & 0100) ? 'x' : '-';
@@ -46,7 +46,7 @@ static void	group_(mode_t mode, char buffer[11])
 {
 	buffer[4] = (mode & 0040) ? 'r' : '-';
 	buffer[5] = (mode & 0020) ? 'w' : '-';
-	if (mode & 01000)
+	if (mode & 02000)
 		buffer[6] = (mode & 0010) ? 's' : 'S';
 	else
 		buffer[6] = (mode & 0010) ? 'x' : '-';
