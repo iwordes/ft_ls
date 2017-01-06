@@ -6,19 +6,20 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 09:51:22 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:53:59 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:10:51 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 static char	*g_swc =
-	"ARU" "ailrtu";
+	"ARSU" "ailrtu";
 
 static void	(*g_swf[])(t_ls*) =
 {
 	sw_show_hidden,
 	sw_recursive,
+	sw_sort_size,
 	sw_sort_created,
 
 	sw_show_all,
