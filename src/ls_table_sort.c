@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:12:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 14:07:17 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 15:59:10 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ static void		sort(t_ent **ent, int (*cmp)(t_ent*, t_ent*), char reverse)
 	}
 }
 
+static int		(*g_sort[])(t_ent*, t_ent*) =
+{
+	sort_name,
+	sort_size,
+	sort_accessed,
+	sort_changed,
+	sort_modified
+}
+
 /*
 ** Sort a NULL-terminated array of t_ent* by the method specified.
 */
@@ -86,12 +95,5 @@ void			ls_table_sort(t_ent **ent, t_order method, char reverse)
 {
 	align_table__1(ent);
 	align_table__2(ent);
-	if (method == accessed)
-		sort(ent + 2, sort_accessed, reverse);
-	else if (method == changed)
-		sort(ent + 2, sort_changed, reverse);
-	else if (method == modified)
-		sort(ent + 2, sort_modified, reverse);
-	else
-		sort(ent + 2, sort_name, reverse);
+	sort(ent + 2, g_sort[method], reverse);
 }

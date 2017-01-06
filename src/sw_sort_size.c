@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sw_sort_created.c                                  :+:      :+:    :+:   */
+/*   sw_sort_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 13:08:53 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 12:17:44 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/05 15:52:24 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/05 15:52:39 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-void	sw_sort_changed(t_ls *config)
+void	sw_sort_size(t_ls *config)
 {
-	config->order = changed;
-	config->time = changed;
+	config->order = size;
 }

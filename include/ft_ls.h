@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:02:28 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 15:56:07 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ typedef enum	e_acm
 
 typedef enum	e_order
 {
-	name = 0,
-	accessed = 4,
-	changed = 5,
-	modified = 6
+	name,
+	size,
+	accessed,
+	created,
+	modified
 }				t_order;
 /*
 typedef struct		s_lstab
@@ -105,6 +106,7 @@ int					sort_name(t_ent *ent1, t_ent *ent2);
 
 void				sw_show_all(t_ls *config);
 void				sw_show_hidden(t_ls *config);
+void				sw_show_inode(t_ls *config);
 void				sw_long_format(t_ls *config);
 void				sw_recursive(t_ls *config);
 void				sw_sort_reverse(t_ls *config);

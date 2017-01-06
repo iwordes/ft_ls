@@ -6,24 +6,27 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 09:51:22 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:02:51 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 15:53:59 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 static char	*g_swc =
-	"AR" "alrt";
+	"ARU" "ailrtu";
 
 static void	(*g_swf[])(t_ls*) =
 {
 	sw_show_hidden,
 	sw_recursive,
+	sw_sort_created,
 
 	sw_show_all,
+	sw_show_inode,
 	sw_long_format,
 	sw_sort_reverse,
 	sw_sort_modified,
+	sw_sort_accessed,
 	NULL
 };
 
