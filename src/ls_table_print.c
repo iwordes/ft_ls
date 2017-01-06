@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 12:15:41 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 15:55:07 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	detailed_print_(t_ent **ent, t_ls *conf)
 	unsigned	i;
 	t_lspad		pad;
 
-	detailed_total_(ent, conf);
+	if (ent[0] != NULL && ent[1] != NULL && ent[2] != NULL)
+		detailed_total_(ent, conf);
 	detailed_pad_(ent, &pad, conf);
 	i = ~0;
 	while (ent[(i += 1)] != NULL)
