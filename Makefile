@@ -26,6 +26,7 @@ SRC    += ls__naitoa.c \
 		  ls_table_print.c \
 		  ls_table_sort.c
 SRC    += sort_accessed.c \
+		  sort_changed.c \
 		  sort_created.c \
 		  sort_modified.c \
 		  sort_name.c \
@@ -36,6 +37,7 @@ SRC    += sw_show_all.c \
 		  sw_long_format.c \
 		  sw_recursive.c \
 		  sw_sort_accessed.c \
+		  sw_sort_changed.c \
 		  sw_sort_created.c \
 		  sw_sort_reverse.c \
 		  sw_sort_size.c \

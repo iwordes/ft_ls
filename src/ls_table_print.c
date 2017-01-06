@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:16:32 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:30:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,38 @@
 **
 */
 
+static void	_detailed_total(t_ent **ent, t_ls *conf)
+{
+	uintmax_t	total;
+	unsigned	i;
+
+	i = (unsigned)-1;
+	total = 0;
+	while (ent[(i += 1)] != NULL)
+	{
+		if (!conf->show_all
+			&& (ft_strequ(ent[i]->name, ".") || ft_strequ(ent[i]->name, "..")))
+			continue ;
+		if (!(conf->show_all || conf->show_hidden) && ent[i]->name[0] == '.')
+			continue ;
+		total += ent[i]->info.st_blocks;
+	}
+	ft_printf("total %ju\n", total);
+}
+
+static void	_detailed_pad(t_ent **ent, t_lspad *pad)
+{
+	(void)ent;
+	(void)pad;
+}
+
 void	_detailed_print(t_ent **ent, t_ls *conf)
 {
 	unsigned	i;
+	t_lspad		pad;
 
+	_detailed_total(ent, conf);
+	_detailed_pad(ent, &pad);
 	i = (unsigned)-1;
 	while (ent[(i += 1)] != NULL)
 	{

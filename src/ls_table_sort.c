@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:12:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 16:05:11 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:08:19 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static void		sort(t_ent **ent, int (*cmp)(t_ent*, t_ent*), char reverse)
 	while ((i += 1) && *(i - 1) != NULL && *i != NULL)
 	{
 		diff = cmp(*(i - 1), *i);
-		if ((reverse) ? (diff < 0) : (diff > 0))
+		if ((reverse) ? (diff > 0) : (diff < 0))
 		{
 			tmp = *i;
 			while (i != ent && (diff = cmp(*(i - 1), tmp)) != 0
-				&& ((reverse) ? (diff < 0) : (diff > 0)))
+				&& ((reverse) ? (diff > 0) : (diff < 0)))
 			{
 				*i = *(i - 1);
 				i -= 1;
@@ -83,6 +83,7 @@ static int		(*g_sort[])(t_ent*, t_ent*) =
 	sort_name,
 	sort_size,
 	sort_accessed,
+	sort_changed,
 	sort_created,
 	sort_modified
 };

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:34:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/04 19:45:06 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:47:16 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_ent	*ls_create_ent(const char *path, char *child)
 		free(ent);
 		return (NULL);
 	}
-	if (stat(qual_path, &ent->info) != 0)
+	if (lstat(qual_path, &ent->info) != 0)
 	{
 		free(ent);
 		free(qual_path);

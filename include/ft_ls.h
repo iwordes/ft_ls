@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 16:07:36 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:19:47 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,30 @@
 # define ERR_FSTAT err_fstat(); return
 # define ERR_OPENDIR err_opendir(); return
 
-typedef enum	e_acm
+typedef enum	e_time
 {
-	mod,
-	acc,
-	crt
-}				t_acm;
+	time_modified,
+	time_accessed,
+	time_changed,
+	time_created
+}				t_time;
 
 typedef enum	e_order
 {
-	name,
-	size,
-	accessed,
-	created,
-	modified
+	order_name,
+	order_size,
+	order_accessed,
+	order_changed,
+	order_created,
+	order_modified
 }				t_order;
-/*
-typedef struct		s_lstab
-{
 
-}					t_lstab;
-*/
-/*
-** ent->child is a NULL-terminated array of pointers.
-** An entry which is not a directory will be signaled by ent->child == NULL.
-*/
+typedef struct		s_lspad
+{
+	unsigned		user;
+	unsigned		group;
+	unsigned		size;
+}					t_lspad;
 
 typedef struct		s_ent
 {
@@ -73,7 +72,7 @@ typedef struct		s_ls
 	char			sort_rev;
 
 	t_order			order;
-	t_acm			time;
+	t_time			time;
 
 	char			multiple_targets;
 }					t_ls;
@@ -100,6 +99,7 @@ void				ls_table_print(t_ent **ent, t_ls *conf);
 void				err_illegal_opt(const char *bin, char opt);
 
 int					sort_accessed(t_ent *ent1, t_ent *ent2);
+int					sort_changed(t_ent *ent1, t_ent *ent2);
 int					sort_created(t_ent *ent1, t_ent *ent2);
 int					sort_modified(t_ent *ent1, t_ent *ent2);
 int					sort_name(t_ent *ent1, t_ent *ent2);
@@ -111,6 +111,7 @@ void				sw_show_inode(t_ls *config);
 void				sw_long_format(t_ls *config);
 void				sw_recursive(t_ls *config);
 void				sw_sort_accessed(t_ls *config);
+void				sw_sort_changed(t_ls *config);
 void				sw_sort_created(t_ls *config);
 void				sw_sort_reverse(t_ls *config);
 void				sw_sort_size(t_ls *config);

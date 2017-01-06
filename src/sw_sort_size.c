@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 15:52:24 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:52:39 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/05 16:48:17 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	sw_sort_size(t_ls *config)
 {
-	config->order = size;
+	config->order = order_size;
 }
