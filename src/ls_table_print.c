@@ -6,15 +6,11 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 10:22:03 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 12:15:41 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-/*
-**
-*/
 
 static void	detailed_total_(t_ent **ent, t_ls *conf)
 {
@@ -73,7 +69,7 @@ void	detailed_print_(t_ent **ent, t_ls *conf)
 
 	detailed_total_(ent, conf);
 	detailed_pad_(ent, &pad, conf);
-	i = (unsigned)-1;
+	i = ~0;
 	while (ent[(i += 1)] != NULL)
 	{
 		if (!conf->show_all
@@ -81,14 +77,7 @@ void	detailed_print_(t_ent **ent, t_ls *conf)
 			continue ;
 		if (!(conf->show_all || conf->show_hidden) && ent[i]->name[0] == '.')
 			continue ;
-		if (conf->show_inode)
-			ft_printf("%*s ", pad.inode, ls_fmt_inode(ent[i]->info.st_ino));
-		ft_printf("%-*s %2d %*s  %*s  %*s %.12s %s\n",
-			pad.mode, ls_fmt_mode(ent[i]), ent[i]->info.st_nlink,
-			pad.user, ls_fmt_user(ent[i]->info.st_uid),
-			pad.group, ls_fmt_group(ent[i]->info.st_gid),
-			pad.size, ls_fmt_size(ent[i]->info.st_size),
-			ctime(&ent[i]->info.st_mtimespec.tv_sec) + 4, ent[i]->name);
+		ls_ent_print_detailed(ent[i], &pad, conf);
 	}
 }
 

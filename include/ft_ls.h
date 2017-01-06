@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 10:08:15 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:43:16 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum	e_time
 
 typedef enum	e_order
 {
-	order_name,
+	order_name = 0,
 	order_size,
 	order_accessed,
 	order_changed,
@@ -61,12 +61,14 @@ typedef struct		s_lspad
 typedef struct		s_ent
 {
 	char			*name;
+	char			*link_to;
 	struct stat		info;
 	char			has_xattr;
 }					t_ent;
 
 typedef struct		s_ls
 {
+	char			colorize;
 	char			detailed;
 	char			follow_sym;
 	char			recurse;
@@ -82,17 +84,22 @@ typedef struct		s_ls
 }					t_ls;
 
 void				ls__naitoa(char buffer[20], uintmax_t integer);
+void				ls__sort(t_ent **e, int (*cmp)(t_ent*, t_ent*), char rev);
+
+void				ls_ent_print_detailed(t_ent *ent, t_lspad *pad, t_ls *conf);
 
 const char			*ls_fmt_group(gid_t gid);
 const char			*ls_fmt_inode(ino_t inode);
 const char			*ls_fmt_mode(t_ent *ent);
 const char			*ls_fmt_size(off_t size);
 const char			*ls_fmt_user(uid_t uid);
+const char			*ls_fmt_name(t_ent *ent, t_ls *conf);
 
 void				ls_init_config(t_ls *config);
-t_ent				*ls_create_ent(const char *path, char *name);
+t_ent				*ls_create_ent(const char *path, char *name, t_ls *conf);
 void				ls_list(const char *path, t_ls *config);
-t_ent				**ls_listdir(const char *path);
+t_ent				**ls_listdir(const char *path, t_ls *conf);
+void				ls_list_targets(char **targets, unsigned t, t_ls *conf);
 void				ls_parse_args(int argc, char **argv, t_ls *config);
 char				ls_parse_switch(char sw, t_ls *config);
 void				ls_parse_targets(int argc, char **argv, int *t, char ***tg);
@@ -109,6 +116,7 @@ int					sort_modified(t_ent *ent1, t_ent *ent2);
 int					sort_name(t_ent *ent1, t_ent *ent2);
 int					sort_size(t_ent *ent1, t_ent *ent2);
 
+void				sw_colorize(t_ls *config);
 void				sw_show_all(t_ls *config);
 void				sw_show_hidden(t_ls *config);
 void				sw_show_inode(t_ls *config);

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 09:59:43 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 14:37:44 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_ent	**panic_(char **child, t_ent **ent, unsigned l)
 ** Return a t_ent[] of the contents of the given directory path.
 */
 
-t_ent			**ls_listdir(const char *path)
+t_ent			**ls_listdir(const char *path, t_ls *conf)
 {
 	char			**child;
 	t_ent			**ent;
@@ -46,7 +46,7 @@ t_ent			**ls_listdir(const char *path)
 	i = 0;
 	while (i < l)
 	{
-		if ((ent[i] = ls_create_ent(path, child[i])) == NULL)
+		if ((ent[i] = ls_create_ent(path, child[i], conf)) == NULL)
 			return (panic_(child, ent, l));
 		i += 1;
 	}

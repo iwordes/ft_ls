@@ -10,16 +10,20 @@ CF     += -L lib -l fs -l ft
 SRC     = main.c
 SRC    += err_illegal_opt.c
 SRC    += ls__naitoa.c \
+		  ls__sort.c \
 		  ls_create_ent.c \
+		  ls_ent_print_detailed.c \
 		  ls_fmt_group.c \
 		  ls_fmt_inode.c \
 		  ls_fmt_mode.c \
 		  ls_fmt_size.c \
 		  ls_fmt_user.c \
+		  ls_fmt_name.c \
 		  ls_init_config.c \
 		  ls_list.c \
 		  ls_listdir.c \
-		  ls_parse_args.c\
+		  ls_list_targets.c \
+		  ls_parse_args.c \
 		  ls_parse_switch.c \
 		  ls_parse_targets.c \
 		  ls_table_fmt.c \
@@ -31,7 +35,8 @@ SRC    += sort_accessed.c \
 		  sort_modified.c \
 		  sort_name.c \
 		  sort_size.c
-SRC    += sw_show_all.c \
+SRC    += sw_colorize.c \
+		  sw_show_all.c \
 		  sw_show_hidden.c \
 		  sw_show_inode.c \
 		  sw_long_format.c \

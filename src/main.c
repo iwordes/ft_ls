@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:53:45 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 09:58:43 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 13:20:19 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ int		main(int argc, char **argv)
 	ls_parse_targets(argc, argv, &tgt_cnt, &targets);
 	if (tgt_cnt == 0)
 		ls_list(".", &config);
-	/*
 	else
 	{
 		if (tgt_cnt > 1)
-			config->multiple_targets = TRUE;
+			config.multiple_targets = TRUE;
 		ls_list_targets(targets, tgt_cnt, &config);
 	}
-	*/
 	return (0);
 }
