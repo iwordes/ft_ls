@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:54:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 19:27:01 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 19:55:34 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ls_list(const char *path, t_ls *conf)
 	ls_table_fmt(path, ent, conf);
 	if (conf->recurse)
 	{
-		write(1, "\n", 1);
+		!(ent[0] == NULL || ent[2] == NULL) && write(1, "\n", 1);
 		i = (unsigned)-1;
 		while (ent[(i += 1)] != NULL)
 		{
@@ -52,6 +52,8 @@ void	ls_list(const char *path, t_ls *conf)
 				// TODO
 				PASS;
 			free(subpath);
+			// NOTE: Will not work in every case. (e.g. next should be ignored)
+			(ent[i + 1] != NULL) && write(1, "\n", 1);
 		}
 	}
 	else
