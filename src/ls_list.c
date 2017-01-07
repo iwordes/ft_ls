@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:54:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 19:55:34 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 20:04:52 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	ls_list(const char *path, t_ls *conf)
 			(ent[i + 1] != NULL) && write(1, "\n", 1);
 		}
 	}
-	else
-		write(1, "\n", 1);
 	_cleanup(ent);
 }
 
