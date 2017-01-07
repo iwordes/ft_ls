@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:12:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 12:41:37 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:40:40 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Sorts by ascending order if `asc` is enabled.
 */
 
-#define OUT_OF_ORDER ((asc) ? ((N) > 0) : ((N) < 0))
+#define OUT_OF_ORDER(N) ((asc) ? ((N) > 0) : ((N) < 0))
 
 void	ls_table_sort(t_ent **table, long (*cmp)(t_ent*, t_ent*), char asc)
 {
