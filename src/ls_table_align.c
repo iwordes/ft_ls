@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:04:13 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 11:19:49 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:02:32 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ static void	ls_table_align_2(t_ent **table)
 
 void	ls_table_align(t_ent **table)
 {
-	ls_table_align_1(table);
-	ls_table_align_2(table);
+	if (table[0] != NULL && table[1] != NULL && table[2] != NULL)
+	{
+		ls_table_align_1(table);
+		ls_table_align_2(table);
+	}
 }
