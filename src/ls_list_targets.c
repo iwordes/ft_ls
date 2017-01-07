@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 19:55:39 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 09:18:59 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ls_list_targets(char **targets, unsigned tgt_cnt, t_ls *conf)
 	unsigned	i;
 
 	if ((ent = ents_from_targets(targets, tgt_cnt, conf)) == NULL)
-		exit(1);
+		exit(LS_ERR_MALLOC);
 	i = ~0;
 	determine_pad_(ent, &pad, conf);
 	while (ent[(i += 1)] != NULL)
@@ -103,6 +103,7 @@ void	ls_list_targets(char **targets, unsigned tgt_cnt, t_ls *conf)
 		if (!S_ISDIR(ent[i]->info.st_mode))
 			continue ;
 		ls_list(ent[i]->name, conf);
+		// If this is not the last target, write a newline.
 		// NOTE: Will not work in every case. (e.g. next should be ignored)
 		(ent[i + 1] != NULL) && write(1, "\n", 1);
 	}

@@ -56,22 +56,19 @@ all: $(NAME)
 .PHONY: clean
 clean:
 	rm -rf build
-	make -C libfs clean
-	make -C libft clean
 
 .PHONY: fclean
 fclean: clean
 	rm -rf bin
 	rm -f lib/libfs.a
 	rm -f lib/libft.a
-	make -C libfs fclean
-	make -C libft fclean
 
 .PHONY: re
 re: fclean all
 
-.PHONY: $(NAME)
+#.PHONY: $(NAME)
 $(NAME): bin/$(NAME)
+	cp -f $< $@
 
 bin/$(NAME): lib/libfs.a lib/libft.a $(SRC)
 	@mkdir -p $(@D)

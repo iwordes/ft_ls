@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 16:09:26 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 09:07:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define ERR_FSTAT err_fstat(); return
 # define ERR_OPENDIR err_opendir(); return
+
+# define LS_ERR_MALLOC 0x4D454D
 
 typedef enum	e_time
 {

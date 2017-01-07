@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 13:45:46 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 15:15:42 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 09:09:24 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ const char		*ls_fmt_name(t_ent *ent, t_ls *conf)
 	ft_strcat(buffer, ent->name);
 	if (color)
 		ft_strcat(buffer, "\e[0m");
-	if (ent->link_to != NULL)
+	if (conf->detailed && ent->link_to != NULL)
 	{
 		ft_strcat(buffer, " -> ");
 		ft_strcat(buffer, ent->link_to);

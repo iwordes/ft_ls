@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:54:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 20:04:52 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 20:16:00 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ls_list(const char *path, t_ls *conf)
 				// TODO
 				PASS;
 			free(subpath);
+			// If this is not the last entry, write a newline.
 			// NOTE: Will not work in every case. (e.g. next should be ignored)
 			(ent[i + 1] != NULL) && write(1, "\n", 1);
 		}

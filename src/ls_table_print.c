@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 15:55:07 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 09:19:48 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	simple_print_(t_ent **ent, t_ls *conf)
 			continue ;
 		if (!conf->show_hidden && ent[i]->name[0] == '.')
 			continue;
-		ft_printf("%s\n", ent[i]->name);
+		ft_printf("%s\n", ls_fmt_name(ent[i], conf));
 	}
 }
 
