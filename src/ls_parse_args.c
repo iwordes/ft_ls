@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 10:34:42 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 17:44:29 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 18:58:48 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ls_parse_args(int argc, char **argv, t_ls *config)
 	a = 1;
 	while (a < argc && argv[a][0] == '-')
 	{
-		if (argv[a][1] == 0 || (argv[a][1] == '-' && argv[a][1] == 0))
+		if (argv[a][1] == 0 || (argv[a][1] == '-' && argv[a][2] == 0))
 			break ;
 		i = 1;
 		while (argv[a][i] != 0)

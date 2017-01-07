@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:54:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 14:38:59 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 19:23:19 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void	ls_list(const char *path, t_ls *conf)
 		exit(0x48414C50);
 	ls_table_sort(ent, order_name, FALSE);
 	if (conf->multiple_targets)
-		ft_printf("\n%s:\n", path);
+		ft_printf("%s:\n", path);
 	ls_table_fmt(path, ent, conf);
 	if (conf->recurse)
 	{
 		i = (unsigned)-1;
 		while (ent[(i += 1)] != NULL)
 		{
+			write(1, "\n", 1);
 			if (ft_strequ(ent[i]->name, ".") || ft_strequ(ent[i]->name, "..")
 				|| !S_ISDIR(ent[i]->info.st_mode))
 				continue ;
@@ -53,6 +54,7 @@ void	ls_list(const char *path, t_ls *conf)
 			free(subpath);
 		}
 	}
+	write(1, "\n", 1);
 	_cleanup(ent);
 }
 
