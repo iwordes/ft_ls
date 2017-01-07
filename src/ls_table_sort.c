@@ -6,71 +6,35 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:12:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 13:10:34 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 12:41:37 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-static void		align_table__1(t_ent **ent)
-{
-	t_ent	*tmp;
-	t_ent	**i;
-
-	i = ent;
-	while (!ft_strequ(ent[0]->name, ".") && ((i += 1) || TRUE))
-	{
-		if (ft_strequ((*i)->name, "."))
-		{
-			tmp = *i;
-			while (i != ent)
-			{
-				*i = *(i - 1);
-				i -= 1;
-			}
-			*i = tmp;
-		}
-	}
-}
-
-static void		align_table__2(t_ent **ent)
-{
-	t_ent	*tmp;
-	t_ent	**i;
-
-	i = ent + 1;
-	while ((i += 1) && !ft_strequ(ent[1]->name, ".."))
-	{
-		if (ft_strequ((*i)->name, ".."))
-		{
-			tmp = *i;
-			while (i != ent + 1)
-			{
-				*i = *(i - 1);
-				i -= 1;
-			}
-			*i = tmp;
-		}
-	}
-}
-
-static int		(*g_sort[])(t_ent*, t_ent*) =
-{
-	sort_name,
-	sort_size,
-	sort_accessed,
-	sort_changed,
-	sort_created,
-	sort_modified
-};
-
 /*
 ** Sort a NULL-terminated array of t_ent* by the method specified.
+** Sorts by ascending order if `asc` is enabled.
 */
 
-void			ls_table_sort(t_ent **ent, t_order method, char reverse)
+#define OUT_OF_ORDER ((asc) ? ((N) > 0) : ((N) < 0))
+
+void	ls_table_sort(t_ent **table, long (*cmp)(t_ent*, t_ent*), char asc)
 {
-	align_table__1(ent);
-	align_table__2(ent);
-	ls__sort(ent + 2, g_sort[method], reverse);
+	long	diff;
+	t_ent	*tmp;
+	size_t	i;
+
+	i = 0;
+	while (ent[i] != NULL && ent[i += 1] != NULL)
+	{
+		if ((diff = cmp(table[i - 1], table[i])) != 0 && OUT_OF_ORDER(diff))
+		{
+			tmp = table[i--];
+			table[i + 1] = table[i];
+			while (i-- > 0 && (diff = cmp(tmp, table[i])) && OUT_OF_ORDER(diff))
+				table[i + 1] = table[i];
+			table[i] = tmp;
+		}
+	}
 }
