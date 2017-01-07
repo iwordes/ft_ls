@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 11:00:26 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 11:01:11 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ls_table_print(t_ent **ent, t_ls *conf)
 {
 	unsigned	i;
 	t_lspad		pad;
-	size_t		total;
 
 	i = 0;
 	if (!conf->detailed)
