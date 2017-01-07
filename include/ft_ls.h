@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 14:43:16 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 16:09:26 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_ls
 	char			colorize;
 	char			detailed;
 	char			follow_sym;
+	char			one_column;
 	char			recurse;
 	char			show_all;
 	char			show_hidden;
@@ -116,18 +117,19 @@ int					sort_modified(t_ent *ent1, t_ent *ent2);
 int					sort_name(t_ent *ent1, t_ent *ent2);
 int					sort_size(t_ent *ent1, t_ent *ent2);
 
-void				sw_colorize(t_ls *config);
-void				sw_show_all(t_ls *config);
-void				sw_show_hidden(t_ls *config);
-void				sw_show_inode(t_ls *config);
-void				sw_long_format(t_ls *config);
-void				sw_recursive(t_ls *config);
-void				sw_sort_accessed(t_ls *config);
-void				sw_sort_changed(t_ls *config);
-void				sw_sort_created(t_ls *config);
-void				sw_sort_reverse(t_ls *config);
-void				sw_sort_size(t_ls *config);
-void				sw_sort_modified(t_ls *config);
+void				sw_1_column(t_ls *cfg);
+void				sw_colorize(t_ls *cfg);
+void				sw_show_all(t_ls *cfg);
+void				sw_show_hidden(t_ls *cfg);
+void				sw_show_inode(t_ls *cfg);
+void				sw_long_format(t_ls *cfg);
+void				sw_recursive(t_ls *cfg);
+void				sw_sort_accessed(t_ls *cfg);
+void				sw_sort_changed(t_ls *cfg);
+void				sw_sort_created(t_ls *cfg);
+void				sw_sort_reverse(t_ls *cfg);
+void				sw_sort_size(t_ls *cfg);
+void				sw_sort_modified(t_ls *cfg);
 
 extern char			*g_name;
 

@@ -6,17 +6,18 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 09:51:22 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 14:42:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/06 16:08:09 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 static char	*g_swc =
-	"AGRSU" "acilrtu";
+	"1AGRSU" "acilrtu";
 
 static void	(*g_swf[])(t_ls*) =
 {
+	sw_1_column,
 	sw_show_hidden,
 	sw_colorize,
 	sw_recursive,

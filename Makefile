@@ -35,7 +35,8 @@ SRC    += sort_accessed.c \
 		  sort_modified.c \
 		  sort_name.c \
 		  sort_size.c
-SRC    += sw_colorize.c \
+SRC    += sw_1_column.c \
+		  sw_colorize.c \
 		  sw_show_all.c \
 		  sw_show_hidden.c \
 		  sw_show_inode.c \
