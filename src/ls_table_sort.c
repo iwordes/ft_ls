@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:12:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 13:40:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:41:45 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ls_table_sort(t_ent **table, long (*cmp)(t_ent*, t_ent*), char asc)
 	size_t	i;
 
 	i = 0;
-	while (ent[i] != NULL && ent[i += 1] != NULL)
+	while (table[i] != NULL && table[i += 1] != NULL)
 	{
 		if ((diff = cmp(table[i - 1], table[i])) != 0 && OUT_OF_ORDER(diff))
 		{
