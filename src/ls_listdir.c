@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 14:37:44 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 10:47:13 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static t_ent	**panic_(char **child, t_ent **ent, unsigned l)
 
 /*
 ** Return a t_ent[] of the contents of the given directory path.
+** Does not return any entry that should not be included.
+*/
+/*
+** TODO: Handle non-directories gracefully
+** TODO: Malloc less space if not necessary
 */
 
 t_ent			**ls_listdir(const char *path, t_ls *conf)
@@ -39,16 +44,20 @@ t_ent			**ls_listdir(const char *path, t_ls *conf)
 	unsigned		l;
 
 	NULL_GUARD(child = fs_listdir(path));
-	if ((l = fs_dirlen(path)) == (unsigned)-1)
-		return (NULL);
+	l = 0;
+	i = ~0;
+	while (child[(i += 1)] != NULL)
+		if (ls__qualifies(child[i], conf))
+			l += 1;
 	if ((ent = (t_ent**)malloc(sizeof(void*) * (l + 1))) == NULL)
 		return (panic_(child, ent, l));
-	i = 0;
-	while (i < l)
+	i = ~0;
+	while ((i += 1) < l)
 	{
-		if ((ent[i] = ls_create_ent(path, child[i], conf)) == NULL)
+		if (!ls__qualifies(child[i], conf))
+			free(child[i]);
+		else if ((ent[i] = ls_create_ent(path, child[i], conf)) == NULL)
 			return (panic_(child, ent, l));
-		i += 1;
 	}
 	free(child);
 	ent[l] = NULL;
