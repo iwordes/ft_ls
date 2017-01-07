@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 09:19:48 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 11:00:26 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,18 @@ static void	detailed_total_(t_ent **ent, t_ls *conf)
 	uintmax_t	total;
 	unsigned	i;
 
-	i = (unsigned)-1;
+	i = ~0;
 	total = 0;
 	while (ent[(i += 1)] != NULL)
-	{
-		if (!conf->show_all
-			&& (ft_strequ(ent[i]->name, ".") || ft_strequ(ent[i]->name, "..")))
-			continue ;
-		if (!(conf->show_all || conf->show_hidden) && ent[i]->name[0] == '.')
-			continue ;
 		total += ent[i]->info.st_blocks;
-	}
 	ft_printf("total %ju\n", total);
 }
 
 /*
 ** Potential TODO: Dynamic padding for nlinks
+*/
+/*
+** Opt: This function may be causing a good chunk of delay.
 */
 
 static void	detailed_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
@@ -44,14 +40,9 @@ static void	detailed_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
 	pad->user = 0;
 	pad->group = 0;
 	pad->size = 0;
-	i = (unsigned)-1;
+	i = ~0;
 	while (ent[(i += 1)] != NULL)
 	{
-		if (!conf->show_all
-			&& (ft_strequ(ent[i]->name, ".") || ft_strequ(ent[i]->name, "..")))
-			continue ;
-		if (!(conf->show_all || conf->show_hidden) && ent[i]->name[0] == '.')
-			continue ;
 		pad->inode = MAX(pad->inode, ft_intlen(ent[i]->info.st_ino));
 		pad->mode = MAX(pad->mode, ft_strlen(ls_fmt_mode(ent[i])));
 		pad->user = MAX(pad->user, ft_strlen(
@@ -62,50 +53,22 @@ static void	detailed_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
 	}
 }
 
-void	detailed_print_(t_ent **ent, t_ls *conf)
+void	ls_table_print(t_ent **ent, t_ls *conf)
 {
 	unsigned	i;
 	t_lspad		pad;
+	size_t		total;
 
-	if (ent[0] != NULL && ent[1] != NULL && ent[2] != NULL)
-		detailed_total_(ent, conf);
-	detailed_pad_(ent, &pad, conf);
-	i = ~0;
-	while (ent[(i += 1)] != NULL)
-	{
-		if (!conf->show_all
-			&& (ft_strequ(ent[i]->name, ".") || ft_strequ(ent[i]->name, "..")))
-			continue ;
-		if (!(conf->show_all || conf->show_hidden) && ent[i]->name[0] == '.')
-			continue ;
-		ls_ent_print_detailed(ent[i], &pad, conf);
-	}
-}
-
-/*
-** TODO: Print columns
-*/
-
-void	simple_print_(t_ent **ent, t_ls *conf)
-{
-	unsigned	i;
-
-	i = (unsigned)-1;
-	while (ent[(i += 1)] != NULL)
-	{
-		if (!conf->show_all && (ft_strequ(ent[i]->name, ".")
-			|| ft_strequ(ent[i]->name, "..")))
-			continue ;
-		if (!conf->show_hidden && ent[i]->name[0] == '.')
-			continue;
-		ft_printf("%s\n", ls_fmt_name(ent[i], conf));
-	}
-}
-
-void	ls_table_print(t_ent **ent, t_ls *conf)
-{
-	if (conf->detailed)
-		detailed_print_(ent, conf);
+	i = 0;
+	if (!conf->detailed)
+		while (ent[i] != NULL)
+			ft_printf("%s\n", ls_fmt_name(ent[i++], conf));
 	else
-		simple_print_(ent, conf);
+	{
+		if (ent[0] != NULL)
+			detailed_total_(ent, conf);
+		detailed_pad_(ent, &pad, conf);
+		while (ent[i] != NULL)
+			ls_ent_print_detailed(ent[i++], &pad, conf);
+	}
 }
