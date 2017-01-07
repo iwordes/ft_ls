@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 10:50:11 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 10:51:32 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_ent	**panic_(char **child, t_ent **ent, unsigned l)
 	return (NULL);
 }
 
-char			name_qualifies_(char *name, t_ls *conf)
+static char		name_qualifies_(char *name, t_ls *conf)
 {
 	if (!conf->show_all && ((!conf->show_hidden && child[i][0] == '.')
 		|| (ft_strequ(child[i], ".") || ft_strequ(child[i], ".."))))
