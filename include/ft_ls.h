@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 13:21:19 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 15:29:56 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,16 @@
 # include <libfs.h>
 # include <libft.h>
 
-# define ERR_FSTAT err_fstat(); return
-# define ERR_OPENDIR err_opendir(); return
+# define LS_MALLOC_GUARD(MEM) if ((MEM) == NULL) exit(ENOMEM)
+# define LS_MGUARD(MEM) LS_MALLOC_GUARD(MEM)
 
-# define LS_ERR_MALLOC 0x4D454D
-# define LS_MALLOCERR(MEM) if ((MEM) == NULL) exit(LS_ERR_MALLOC)
-
-typedef enum	e_time
+typedef enum		e_time
 {
 	time_modified,
 	time_accessed,
 	time_changed,
 	time_created
-}				t_time;
+}					t_time;
 
 typedef struct		s_lspad
 {
@@ -76,6 +73,7 @@ typedef struct		s_ls
 	char			sort_rev;
 
 	long			(*order)(t_ent*, t_ent*);
+	long			(*order_cache)(t_ent*, t_ent*);
 	t_time			time;
 
 	char			multiple_targets;
@@ -99,7 +97,7 @@ const char			*ls_fmt_name(t_ent *ent, t_ls *conf);
 
 void				ls_init_config(t_ls *config);
 t_ent				*ls_create_ent(const char *path, char *name, t_ls *conf);
-void				ls_list(const char *path, t_ls *config);
+char				ls_list(const char *path, t_ls *config);
 t_ent				**ls_listdir(const char *path, t_ls *conf);
 void				ls_list_targets(char **targets, unsigned t, t_ls *conf);
 void				ls_parse_args(int argc, char **argv, t_ls *config);
@@ -114,6 +112,8 @@ void				ls_table_sort_adv(t_ent **t, long (*c1)(t_ent*, t_ent*),
 										long (*c2)(t_ent*, t_ent*), char r);
 
 void				err_illegal_opt(const char *bin, char opt);
+char				err_list(const char *path);
+char				err_path(const char *path);
 
 long				sort_accessed(t_ent *ent1, t_ent *ent2);
 long				sort_changed(t_ent *ent1, t_ent *ent2);
@@ -137,5 +137,6 @@ void				sw_sort_size(t_ls *cfg);
 void				sw_sort_modified(t_ls *cfg);
 
 extern char			*g_name;
+extern int			g_exit;
 
 #endif

@@ -8,7 +8,9 @@ CF     += -I include -I libfs/include -I libft/include
 CF     += -L lib -l fs -l ft
 
 SRC     = main.c
-SRC    += err_illegal_opt.c
+SRC    += err_illegal_opt.c \
+		  err_list.c \
+		  err_path.c
 SRC    += ls__propertime.c \
 		  ls__naitoa.c \
 		  ls__sort.c \

@@ -6,13 +6,14 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:53:45 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 16:40:26 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 15:29:27 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
 char	*g_name;
+int		g_exit = 0;
 
 int		main(int argc, char **argv)
 {
@@ -32,5 +33,5 @@ int		main(int argc, char **argv)
 			config.multiple_targets = TRUE;
 		ls_list_targets(targets, tgt_cnt, &config);
 	}
-	return (0);
+	return (g_exit);
 }

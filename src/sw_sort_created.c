@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 13:08:53 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 13:51:55 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 13:43:01 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	sw_sort_created(t_ls *config)
 {
-	config->order = sort_created;
+	if (config->do_sort)
+		config->order = sort_created;
+	config->order_cache = sort_created;
 	config->time = time_created;
 }
