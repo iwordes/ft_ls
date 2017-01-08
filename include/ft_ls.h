@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 09:34:40 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 10:29:06 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define FT_LS_H
 
 # include <dirent.h>
+# include <errno.h>
 # include <grp.h>
 # include <pwd.h>
 # include <sys/stat.h>
@@ -105,8 +106,10 @@ void				ls_parse_targets(int argc, char **argv, int *t, char ***tg);
 
 void				ls_table_align(t_ent **table);
 void				ls_table_fmt(const char *parent, t_ent **table, t_ls *conf);
-void				ls_table_sort(t_ent **t, long (*c)(t_ent*, t_ent*), char r);
 void				ls_table_print(t_ent **table, t_ls *conf);
+void				ls_table_sort(t_ent **t, long (*c)(t_ent*, t_ent*), char r);
+void				ls_table_sort_adv(t_ent **t, long (*c1)(t_ent*, t_ent*),
+										long (*c2)(t_ent*, t_ent*), char r);
 
 void				err_illegal_opt(const char *bin, char opt);
 

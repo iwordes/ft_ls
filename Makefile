@@ -33,7 +33,8 @@ SRC    += ls__propertime.c \
 		  ls_table_align.c \
 		  ls_table_fmt.c \
 		  ls_table_print.c \
-		  ls_table_sort.c
+		  ls_table_sort.c \
+		  ls_table_sort_adv.c
 SRC    += sort_accessed.c \
 		  sort_changed.c \
 		  sort_created.c \
