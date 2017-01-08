@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 10:28:01 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 10:39:43 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:49:48 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Sort by time of last access.
 */
 
-int		sort_accessed(t_ent *e1, t_ent *e2)
+long	sort_accessed(t_ent *e1, t_ent *e2)
 {
 	if (e1->info.st_atimespec.tv_sec != e2->info.st_atimespec.tv_sec)
 		return (e1->info.st_atimespec.tv_sec - e2->info.st_atimespec.tv_sec);

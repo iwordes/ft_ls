@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 16:23:34 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 16:40:04 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:51:49 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	sw_sort_changed(t_ls *conf)
 {
-	conf->order = order_changed;
+	conf->order = sort_changed;
 	conf->time = time_changed;
 }

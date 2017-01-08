@@ -6,13 +6,13 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 15:58:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 15:58:38 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:50:11 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-int		sort_size(t_ent *ent1, t_ent *ent2)
+long	sort_size(t_ent *ent1, t_ent *ent2)
 {
 	return (ent1->info.st_size - ent2->info.st_size);
 }

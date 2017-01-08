@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 10:02:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/05 14:07:49 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 16:39:56 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 **
 */
 
-void			ls_table_fmt(const char *parent, t_ent **o_ent, t_ls *conf)
+void			ls_table_fmt(const char *parent, t_ent **table, t_ls *conf)
 {
-	t_ent		**ent;
+	t_ent		**table_copy;
 	unsigned	i;
 	unsigned	l;
 
 	l = 0;
-	while (o_ent[l] != NULL)
+	while (table[l] != NULL)
 		l += 1;
-	if ((ent = (t_ent**)malloc(sizeof(void*) * (l + 1))) == NULL)
+	if ((table_copy = (t_ent**)malloc(sizeof(void*) * (l + 1))) == NULL)
 		// TODO: Handle errors
 		return ;
 	i = 0;
 	while (i <= l)
 	{
-		ent[i] = o_ent[i];
+		table_copy[i] = table[i];
 		i += 1;
 	}
-	ls_table_sort(ent, conf->order, conf->sort_rev);
-	ls_table_print(ent, conf);
+	ls_table_sort(table_copy, conf->order, conf->sort_rev);
+	ls_table_print(table_copy, conf);
 	(void)parent;
 }

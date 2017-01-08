@@ -6,13 +6,13 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 11:01:11 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:43:18 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-static void	detailed_total_(t_ent **ent, t_ls *conf)
+static void	detailed_total_(t_ent **ent)
 {
 	uintmax_t	total;
 	unsigned	i;
@@ -31,7 +31,7 @@ static void	detailed_total_(t_ent **ent, t_ls *conf)
 ** Opt: This function may be causing a good chunk of delay.
 */
 
-static void	detailed_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
+static void	detailed_pad_(t_ent **ent, t_lspad *pad)
 {
 	unsigned	i;
 
@@ -65,8 +65,8 @@ void	ls_table_print(t_ent **ent, t_ls *conf)
 	else
 	{
 		if (ent[0] != NULL)
-			detailed_total_(ent, conf);
-		detailed_pad_(ent, &pad, conf);
+			detailed_total_(ent);
+		detailed_pad_(ent, &pad);
 		while (ent[i] != NULL)
 			ls_ent_print_detailed(ent[i++], &pad, conf);
 	}

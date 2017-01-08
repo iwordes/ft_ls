@@ -26,6 +26,7 @@ SRC    += ls__naitoa.c \
 		  ls_parse_args.c \
 		  ls_parse_switch.c \
 		  ls_parse_targets.c \
+		  ls_table_align.c \
 		  ls_table_fmt.c \
 		  ls_table_print.c \
 		  ls_table_sort.c

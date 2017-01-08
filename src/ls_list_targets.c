@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 09:18:59 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 16:40:16 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ static t_ent	**ents_from_targets(char **raw, unsigned l, t_ls *conf)
 		i += 1;
 	}
 	ent[l] = NULL;
-	// TODO: Dynamic sorting here
-	ls__sort(ent, sort_name, FALSE);
 	return (ent);
 }
 
-static void		determine_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
+static void		determine_pad_(t_ent **ent, t_lspad *pad)
 {
 	unsigned	i;
 
@@ -55,11 +53,6 @@ static void		determine_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
 	while (ent[(i += 1)] != NULL)
 	{
 		if (!S_ISREG(ent[i]->info.st_mode))
-			continue ;
-		if (!conf->show_all
-			&& (ft_strequ(ent[i]->name, ".") || ft_strequ(ent[i]->name, "..")))
-			continue ;
-		if (!(conf->show_all || conf->show_hidden) && ent[i]->name[0] == '.')
 			continue ;
 		pad->inode = MAX(pad->inode, ft_intlen(ent[i]->info.st_ino));
 		pad->mode = MAX(pad->mode, ft_strlen(ls_fmt_mode(ent[i])));
@@ -78,16 +71,17 @@ static void		determine_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
 ** If conf->recurse is enabled, print all subdirectories, too.
 */
 
-void	ls_list_targets(char **targets, unsigned tgt_cnt, t_ls *conf)
+void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 {
 	t_ent		**ent;
 	t_lspad		pad;
 	unsigned	i;
 
-	if ((ent = ents_from_targets(targets, tgt_cnt, conf)) == NULL)
+	if ((ent = ents_from_targets(targets, t, conf)) == NULL)
 		exit(LS_ERR_MALLOC);
+	ls_table_sort(ent, conf->order, conf->sort_rev);
+	determine_pad_(ent, &pad);
 	i = ~0;
-	determine_pad_(ent, &pad, conf);
 	while (ent[(i += 1)] != NULL)
 	{
 		if (S_ISDIR(ent[i]->info.st_mode))
@@ -102,10 +96,8 @@ void	ls_list_targets(char **targets, unsigned tgt_cnt, t_ls *conf)
 	{
 		if (!S_ISDIR(ent[i]->info.st_mode))
 			continue ;
+		write(1, "\n", 1);
 		ls_list(ent[i]->name, conf);
-		// If this is not the last target, write a newline.
-		// NOTE: Will not work in every case. (e.g. next should be ignored)
-		(ent[i + 1] != NULL) && write(1, "\n", 1);
 	}
 	free(ent);
 }

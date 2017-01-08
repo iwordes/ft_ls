@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 09:07:36 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 13:52:54 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,6 @@ typedef enum	e_time
 	time_created
 }				t_time;
 
-typedef enum	e_order
-{
-	order_name = 0,
-	order_size,
-	order_accessed,
-	order_changed,
-	order_created,
-	order_modified
-}				t_order;
-
 typedef struct		s_lspad
 {
 	unsigned		inode;
@@ -80,7 +70,7 @@ typedef struct		s_ls
 	char			show_inode;
 	char			sort_rev;
 
-	t_order			order;
+	long			(*order)(t_ent*, t_ent*);
 	t_time			time;
 
 	char			multiple_targets;
@@ -106,18 +96,20 @@ void				ls_list_targets(char **targets, unsigned t, t_ls *conf);
 void				ls_parse_args(int argc, char **argv, t_ls *config);
 char				ls_parse_switch(char sw, t_ls *config);
 void				ls_parse_targets(int argc, char **argv, int *t, char ***tg);
-void				ls_table_fmt(const char *parent, t_ent **o_ent, t_ls *conf);
-void				ls_table_sort(t_ent **ent, t_order method, char reverse);
-void				ls_table_print(t_ent **ent, t_ls *conf);
+
+void				ls_table_align(t_ent **table);
+void				ls_table_fmt(const char *parent, t_ent **table, t_ls *conf);
+void				ls_table_sort(t_ent **t, long (*c)(t_ent*, t_ent*), char r);
+void				ls_table_print(t_ent **table, t_ls *conf);
 
 void				err_illegal_opt(const char *bin, char opt);
 
-int					sort_accessed(t_ent *ent1, t_ent *ent2);
-int					sort_changed(t_ent *ent1, t_ent *ent2);
-int					sort_created(t_ent *ent1, t_ent *ent2);
-int					sort_modified(t_ent *ent1, t_ent *ent2);
-int					sort_name(t_ent *ent1, t_ent *ent2);
-int					sort_size(t_ent *ent1, t_ent *ent2);
+long				sort_accessed(t_ent *ent1, t_ent *ent2);
+long				sort_changed(t_ent *ent1, t_ent *ent2);
+long				sort_created(t_ent *ent1, t_ent *ent2);
+long				sort_modified(t_ent *ent1, t_ent *ent2);
+long				sort_name(t_ent *ent1, t_ent *ent2);
+long				sort_size(t_ent *ent1, t_ent *ent2);
 
 void				sw_1_column(t_ls *cfg);
 void				sw_colorize(t_ls *cfg);
