@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls__naitoa.c                                       :+:      :+:    :+:   */
+/*   ls_fmt_date.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 14:33:36 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 19:45:39 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/08 09:15:39 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/08 09:35:40 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-/*
-** Non-Allocating Integer to ASCII
-*/
-
-void	ls__naitoa(char buff[20], uintmax_t num)
+const char	*ls_fmt_date(time_t epoch)
 {
-	int		i;
+	static char	buffer[7];
 
-	i = ft_uintlen(num);
-	buff[i] = 0;
-	while (TRUE)
-	{
-		buff[i -= 1] = '0' + (num % 10);
-		if ((num /= 10) == 0)
-			break ;
-	}
+	ft_strncpy(buffer, ctime(&epoch) + 4, 6);
+	return (buffer);
 }

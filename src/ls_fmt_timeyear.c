@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls__naitoa.c                                       :+:      :+:    :+:   */
+/*   ls_fmt_timeyear.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 14:33:36 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 19:45:39 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/08 09:18:52 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/08 09:47:58 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
+#define SEC_IN_YEAR 31556926
 
-/*
-** Non-Allocating Integer to ASCII
-*/
-
-void	ls__naitoa(char buff[20], uintmax_t num)
+const char	*ls_fmt_timeyear(time_t epoch)
 {
-	int		i;
+	static char	buffer[20];
 
-	i = ft_uintlen(num);
-	buff[i] = 0;
-	while (TRUE)
+	if (epoch / SEC_IN_YEAR != time(NULL) / SEC_IN_YEAR)
+		ls__naitoa(buffer, (epoch / SEC_IN_YEAR) + 1970);
+	else
 	{
-		buff[i -= 1] = '0' + (num % 10);
-		if ((num /= 10) == 0)
-			break ;
+		ft_strncpy(buffer, ctime(&epoch) + 11, 5);
+		buffer[6] = 0;
 	}
+	return (buffer);
 }

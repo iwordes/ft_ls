@@ -9,7 +9,8 @@ CF     += -L lib -l fs -l ft
 
 SRC     = main.c
 SRC    += err_illegal_opt.c
-SRC    += ls__naitoa.c \
+SRC    += ls__propertime.c \
+		  ls__naitoa.c \
 		  ls__sort.c \
 		  ls_create_ent.c \
 		  ls_ent_print_detailed.c \
@@ -19,6 +20,8 @@ SRC    += ls__naitoa.c \
 		  ls_fmt_nlinks.c \
 		  ls_fmt_size.c \
 		  ls_fmt_user.c \
+		  ls_fmt_date.c \
+		  ls_fmt_timeyear.c \
 		  ls_fmt_name.c \
 		  ls_init_config.c \
 		  ls_list.c \

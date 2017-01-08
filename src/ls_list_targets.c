@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 18:46:17 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 09:49:59 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_ent	**ents_from_targets(char **raw, unsigned l, t_ls *conf)
 	return (ent);
 }
 
-static void		determine_pad_(t_ent **ent, t_lspad *pad)
+static void		determine_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
 {
 	unsigned	i;
 
@@ -59,7 +59,10 @@ static void		determine_pad_(t_ent **ent, t_lspad *pad)
 		pad->group = MAX(pad->group, ft_strlen(
 			ls_fmt_group(ent[i]->info.st_gid)));
 		pad->size = MAX(pad->size, ft_intlen(ent[i]->info.st_size));
+		pad->timeyear = MAX(pad->timeyear, ft_strlen(
+			ls_fmt_timeyear(ls__propertime(ent[i], conf))));
 	}
+	pad->timeyear = MAX(pad->timeyear, 5);
 }
 
 /*
@@ -78,7 +81,7 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	if ((ent = ents_from_targets(targets, t, conf)) == NULL)
 		exit(LS_ERR_MALLOC);
 	ls_table_sort(ent, conf->order, conf->sort_rev);
-	determine_pad_(ent, &pad);
+	determine_pad_(ent, &pad, conf);
 	i = ~0;
 	while (ent[(i += 1)] != NULL)
 	{

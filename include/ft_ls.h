@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 18:45:12 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 09:34:40 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_lspad
 	unsigned		user;
 	unsigned		group;
 	unsigned		size;
+	unsigned		timeyear;
 }					t_lspad;
 
 typedef struct		s_ent
@@ -77,6 +78,7 @@ typedef struct		s_ls
 	char			multiple_targets;
 }					t_ls;
 
+time_t				ls__propertime(t_ent *ent, t_ls *conf);
 void				ls__naitoa(char buffer[20], uintmax_t integer);
 void				ls__sort(t_ent **e, int (*cmp)(t_ent*, t_ent*), char rev);
 
@@ -88,6 +90,8 @@ const char			*ls_fmt_nlinks(nlink_t nlinks);
 const char			*ls_fmt_mode(t_ent *ent);
 const char			*ls_fmt_size(off_t size);
 const char			*ls_fmt_user(uid_t uid);
+const char			*ls_fmt_date(time_t epoch);
+const char			*ls_fmt_timeyear(time_t epoch);
 const char			*ls_fmt_name(t_ent *ent, t_ls *conf);
 
 void				ls_init_config(t_ls *config);

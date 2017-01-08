@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls__naitoa.c                                       :+:      :+:    :+:   */
+/*   ls__propertime.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 14:33:36 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 19:45:39 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/08 09:28:48 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/08 09:29:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-/*
-** Non-Allocating Integer to ASCII
-*/
-
-void	ls__naitoa(char buff[20], uintmax_t num)
+time_t	ls__propertime(t_ent *ent, t_ls *conf)
 {
-	int		i;
-
-	i = ft_uintlen(num);
-	buff[i] = 0;
-	while (TRUE)
-	{
-		buff[i -= 1] = '0' + (num % 10);
-		if ((num /= 10) == 0)
-			break ;
-	}
+	if (conf->time == time_modified)
+		return (ent->info.st_mtimespec.tv_sec);
+	else if (conf->time == time_accessed)
+		return (ent->info.st_atimespec.tv_sec);
+	else if (conf->time == time_changed)
+		return (ent->info.st_ctimespec.tv_sec);
+	else if (conf->time == time_created)
+		return (ent->info.st_birthtimespec.tv_sec);
+	else
+		return (ent->info.st_mtimespec.tv_sec);
 }
