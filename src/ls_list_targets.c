@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 16:40:16 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 18:46:17 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,16 @@ static void		determine_pad_(t_ent **ent, t_lspad *pad)
 {
 	unsigned	i;
 
-	pad->inode = 0;
-	pad->mode = 0;
-	pad->user = 0;
-	pad->group = 0;
-	pad->size = 0;
-	i = (unsigned)-1;
+	i = ~0;
+	ft_bzero(pad, sizeof(t_lspad));
 	while (ent[(i += 1)] != NULL)
 	{
 		if (!S_ISREG(ent[i]->info.st_mode))
 			continue ;
 		pad->inode = MAX(pad->inode, ft_intlen(ent[i]->info.st_ino));
 		pad->mode = MAX(pad->mode, ft_strlen(ls_fmt_mode(ent[i])));
+		pad->nlinks = MAX(pad->nlinks, ft_strlen(
+			ls_fmt_nlinks(ent[i]->info.st_nlink)));
 		pad->user = MAX(pad->user, ft_strlen(
 			ls_fmt_user(ent[i]->info.st_uid)));
 		pad->group = MAX(pad->group, ft_strlen(
@@ -96,7 +94,7 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	{
 		if (!S_ISDIR(ent[i]->info.st_mode))
 			continue ;
-		write(1, "\n", 1);
+		(i != 0) && write(1, "\n", 1);
 		ls_list(ent[i]->name, conf);
 	}
 	free(ent);

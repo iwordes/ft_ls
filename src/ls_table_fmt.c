@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 10:02:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 16:39:56 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 18:32:05 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void			ls_table_fmt(const char *parent, t_ent **table, t_ls *conf)
 	unsigned	i;
 	unsigned	l;
 
+	ls_table_sort(table, sort_name, FALSE);
+	ls_table_align(table);
 	l = 0;
 	while (table[l] != NULL)
 		l += 1;

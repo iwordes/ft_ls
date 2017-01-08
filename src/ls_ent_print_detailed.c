@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 11:18:22 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 14:40:15 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 18:59:55 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void			ls_ent_print_detailed(t_ent *ent, t_lspad *pad, t_ls *conf)
 	t = time__(ent, conf);
 	if (conf->show_inode)
 		ft_printf("%-*s ", pad->inode, ls_fmt_inode(ent->info.st_ino));
-	ft_printf("%-*s %2d %*s  %*s  %*s %.12s %s\n",
+	ft_printf("%-*s  %*s %*s  %*s  %*s %.12s %s\n",
 		pad->mode, ls_fmt_mode(ent),
-		ent->info.st_nlink,
+		pad->nlinks, ls_fmt_nlinks(ent->info.st_nlink),
 		pad->user, ls_fmt_user(ent->info.st_uid),
 		pad->group, ls_fmt_group(ent->info.st_gid),
 		pad->size, ls_fmt_size(ent->info.st_size),

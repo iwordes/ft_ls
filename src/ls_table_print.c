@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 09:29:50 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 13:43:18 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 18:58:23 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,14 @@ static void	detailed_pad_(t_ent **ent, t_lspad *pad)
 {
 	unsigned	i;
 
-	pad->inode = 0;
-	pad->mode = 0;
-	pad->user = 0;
-	pad->group = 0;
-	pad->size = 0;
 	i = ~0;
+	ft_bzero(pad, sizeof(t_lspad));
 	while (ent[(i += 1)] != NULL)
 	{
 		pad->inode = MAX(pad->inode, ft_intlen(ent[i]->info.st_ino));
 		pad->mode = MAX(pad->mode, ft_strlen(ls_fmt_mode(ent[i])));
+		pad->nlinks = MAX(pad->nlinks, ft_strlen(
+			ls_fmt_nlinks(ent[i]->info.st_nlink)));
 		pad->user = MAX(pad->user, ft_strlen(
 			ls_fmt_user(ent[i]->info.st_uid)));
 		pad->group = MAX(pad->group, ft_strlen(
@@ -53,7 +51,7 @@ static void	detailed_pad_(t_ent **ent, t_lspad *pad)
 	}
 }
 
-void	ls_table_print(t_ent **ent, t_ls *conf)
+void		ls_table_print(t_ent **ent, t_ls *conf)
 {
 	unsigned	i;
 	t_lspad		pad;

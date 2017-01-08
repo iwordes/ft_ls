@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 13:52:54 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/07 18:45:12 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_lspad
 {
 	unsigned		inode;
 	unsigned		mode;
+	unsigned		nlinks;
 	unsigned		user;
 	unsigned		group;
 	unsigned		size;
@@ -83,6 +84,7 @@ void				ls_ent_print_detailed(t_ent *ent, t_lspad *pad, t_ls *conf);
 
 const char			*ls_fmt_group(gid_t gid);
 const char			*ls_fmt_inode(ino_t inode);
+const char			*ls_fmt_nlinks(nlink_t nlinks);
 const char			*ls_fmt_mode(t_ent *ent);
 const char			*ls_fmt_size(off_t size);
 const char			*ls_fmt_user(uid_t uid);
