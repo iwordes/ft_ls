@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 09:49:59 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 13:01:50 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,82 @@ static void		determine_pad_(t_ent **ent, t_lspad *pad, t_ls *conf)
 ** If conf->recurse is enabled, print all subdirectories, too.
 */
 
+static void	ldir__(t_ent **dir, t_ent **table, t_ls *conf)
+{
+	unsigned	d;
+	unsigned	i;
+
+	d = 0;
+	i = ~0;
+	while (table[i += 1] != NULL)
+		if (S_ISDIR(table[i]->info.st_mode))
+			dir[d++] = table[i];
+	dir[d] = NULL;
+	ls_table_sort(dir, sort_name, FALSE);
+	i = ~0;
+	while (dir[i += 1] != NULL)
+	{
+		(i != 0) && write(1, "\n", 1);
+		ls_list(dir[i]->name, conf);
+	}
+	i = ~0;
+	while (dir[i += 1] != NULL)
+		free(dir[i]);
+}
+
+static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
+{
+	unsigned	f;
+	unsigned	i;
+	t_lspad		pad;
+
+	f = 0;
+	i = ~0;
+	while (table[i += 1] != NULL)
+		if (!S_ISDIR(table[i]->info.st_mode))
+			file[f++] = table[i];
+	file[f] = NULL;
+	ls_table_sort(file, conf->order, conf->sort_rev);
+	if (conf->detailed)
+		determine_pad_(file, &pad, conf);
+	i = ~0;
+	while (file[i += 1] != NULL)
+		if (conf->detailed)
+			ls_ent_print_detailed(file[i], &pad, conf);
+		else
+			ft_printf("%s\n", file[i]->name);
+	i = ~0;
+	while (file[i += 1] != NULL)
+		free(file[i]);
+}
+
 void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
+{
+	t_ent		**table;
+	t_ent		**file;
+	t_ent		**dir;
+	unsigned	i;
+	unsigned	l;
+
+	LS_MALLOCERR(table = ents_from_targets(targets, t, conf));
+	l = 0;
+	i = ~0;
+	while (table[i += 1] != NULL)
+		(!S_ISDIR(table[i]->info.st_mode)) && (l += 1);
+	LS_MALLOCERR(file = (t_ent**)malloc(sizeof(void*) * (l + 1)));
+	lfile__(file, table, conf);
+	(l > 0) && write(1, "\n", 1);
+	l = 0;
+	i = ~0;
+	while (table[i += 1] != NULL)
+		(S_ISDIR(table[i]->info.st_mode)) && (l += 1);
+	LS_MALLOCERR(dir = (t_ent**)malloc(sizeof(void*) * (l + 1)));
+	ldir__(dir, table, conf);
+	free(dir);
+	free(file);
+	free(table);
+}
+/*
 {
 	t_ent		**ent;
 	t_lspad		pad;
@@ -81,12 +156,14 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	if ((ent = ents_from_targets(targets, t, conf)) == NULL)
 		exit(LS_ERR_MALLOC);
 	ls_table_sort(ent, conf->order, conf->sort_rev);
+	ls_table_sort_adv()
 	determine_pad_(ent, &pad, conf);
 	i = ~0;
 	while (ent[(i += 1)] != NULL)
 	{
 		if (S_ISDIR(ent[i]->info.st_mode))
 			continue ;
+		conf->ltargets__hasfile = TRUE;
 		if (conf->detailed)
 			ls_ent_print_detailed(ent[i], &pad, conf);
 		else
@@ -97,8 +174,9 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	{
 		if (!S_ISDIR(ent[i]->info.st_mode))
 			continue ;
-		(i != 0) && write(1, "\n", 1);
+		(i != 0 || conf->ltargets__hasfile) && write(1, "\n", 1);
 		ls_list(ent[i]->name, conf);
 	}
 	free(ent);
 }
+*/

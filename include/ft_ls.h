@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 10:29:06 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 13:21:19 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ERR_OPENDIR err_opendir(); return
 
 # define LS_ERR_MALLOC 0x4D454D
+# define LS_MALLOCERR(MEM) if ((MEM) == NULL) exit(LS_ERR_MALLOC)
 
 typedef enum	e_time
 {
@@ -65,6 +66,7 @@ typedef struct		s_ls
 {
 	char			colorize;
 	char			detailed;
+	char			do_sort;
 	char			follow_sym;
 	char			one_column;
 	char			recurse;
