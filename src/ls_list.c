@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:54:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 14:45:07 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 19:29:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ static void	recurse_(const char *path, t_ent *ent, t_ls *conf)
 		{
 			write(1, "\n", 1);
 			conf->multiple_targets = TRUE;
-			if ((subpath = fs_join(path, ent->name)) == NULL)
-				exit(ENOMEM);
+			LS_MGUARD(subpath = fs_join(path, ent->name));
 			ls_list(subpath, conf) || err_list(subpath);
 			free(subpath);
 		}
