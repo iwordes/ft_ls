@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 15:52:41 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 15:54:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,36 +102,3 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	free(file);
 	free(table);
 }
-/*
-{
-	t_ent		**ent;
-	t_lspad		pad;
-	unsigned	i;
-
-	if ((ent = ents_from_targets(targets, t, conf)) == NULL)
-		exit(LS_ERR_MALLOC);
-	ls_table_sort(ent, conf->order, conf->sort_rev);
-	ls_table_sort_adv()
-	determine_pad_(ent, &pad, conf);
-	i = ~0;
-	while (ent[(i += 1)] != NULL)
-	{
-		if (S_ISDIR(ent[i]->info.st_mode))
-			continue ;
-		conf->ltargets__hasfile = TRUE;
-		if (conf->detailed)
-			ls_ent_print_detailed(ent[i], &pad, conf);
-		else
-			ft_printf("%s\n", ent[i]->name);
-	}
-	i = ~0;
-	while (ent[(i += 1)] != NULL)
-	{
-		if (!S_ISDIR(ent[i]->info.st_mode))
-			continue ;
-		(i != 0 || conf->ltargets__hasfile) && write(1, "\n", 1);
-		ls_list(ent[i]->name, conf);
-	}
-	free(ent);
-}
-*/

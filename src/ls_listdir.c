@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 15:58:17 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 16:39:30 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ t_ent			**ls_listdir(const char *path, t_ls *conf)
 	while (child[i += 1] != NULL)
 		if (name_qualifies_(child[i], conf))
 			l += 1;
-	if ((table = (t_ent**)malloc(sizeof(void*) * (l + 1))) == NULL)
-		return (panic_(child, table, l));
+	LS_MGUARD(table = (t_ent**)malloc(sizeof(void*) * (l + 1)));
 	if (!genloop_(path, child, table, conf))
 		return (panic_(child, table, l));
 	free(child);
