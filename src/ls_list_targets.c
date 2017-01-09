@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 15:54:36 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 16:57:44 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
 {
 	unsigned	f;
 	unsigned	i;
+	t_lspad		pad;
 
 	f = 0;
 	i = ~0;
@@ -70,7 +71,16 @@ static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
 			file[f++] = table[i];
 	file[f] = NULL;
 	ls_table_sort(file, conf->order, conf->sort_rev);
-	ls_table_fmt(NULL, file, conf);
+	ls_table_sort_adv(file, conf->order, sort_name, conf->sort_rev);
+	ls_table_align(file);
+	ls__genpad(file, &pad, conf);
+	i = ~0;
+	if (conf->detailed)
+		while (file[i += 1] != NULL)
+			ls_ent_print_detailed(file[i], &pad, conf);
+	else
+		while (file[i += 1] != NULL)
+			ft_printf("%s\n", file[i]->name);
 	i = ~0;
 	while (file[i += 1] != NULL)
 		free(file[i]);

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 16:34:45 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/08 16:53:47 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct		s_ls
 	char			multiple_targets;
 }					t_ls;
 
+void				ls__genpad(t_ent **ent, t_lspad *pad, t_ls *conf);
 time_t				ls__propertime(t_ent *ent, t_ls *conf);
 void				ls__naitoa(char buffer[20], uintmax_t integer);
 void				ls__sort(t_ent **e, int (*cmp)(t_ent*, t_ent*), char rev);
