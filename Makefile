@@ -17,6 +17,8 @@ SRC    += ls__genpad.c \
 		  ls__sort.c \
 		  ls_create_ent.c \
 		  ls_ent_print_detailed.c \
+		  ls_fmt_devmajor.c \
+		  ls_fmt_devminor.c \
 		  ls_fmt_group.c \
 		  ls_fmt_inode.c \
 		  ls_fmt_mode.c \

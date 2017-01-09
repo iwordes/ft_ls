@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 16:53:47 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/09 10:51:57 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <grp.h>
 # include <pwd.h>
 # include <sys/stat.h>
+# include <sys/types.h>
 # include <sys/xattr.h>
 
 # include <libfs.h>
@@ -31,6 +32,9 @@
 
 # define LS_MALLOC_GUARD(MEM) if ((MEM) == NULL) exit(ENOMEM)
 # define LS_MGUARD(MEM) LS_MALLOC_GUARD(MEM)
+
+# define LS_DEVMAJ(D) (((D) >> 8) & 0x7F)
+# define LS_DEVMIN(D) ((D) & 0xFF)
 
 typedef enum		e_time
 {
@@ -47,6 +51,7 @@ typedef struct		s_lspad
 	unsigned		nlinks;
 	unsigned		user;
 	unsigned		group;
+	unsigned		devmajor;
 	unsigned		size;
 	unsigned		timeyear;
 }					t_lspad;
@@ -86,11 +91,13 @@ void				ls__sort(t_ent **e, int (*cmp)(t_ent*, t_ent*), char rev);
 
 void				ls_ent_print_detailed(t_ent *ent, t_lspad *pad, t_ls *conf);
 
+const char			*ls_fmt_devmajor(t_ent *ent);
+const char			*ls_fmt_devminor(t_ent *ent);
 const char			*ls_fmt_group(gid_t gid);
 const char			*ls_fmt_inode(ino_t inode);
 const char			*ls_fmt_nlinks(nlink_t nlinks);
 const char			*ls_fmt_mode(t_ent *ent);
-const char			*ls_fmt_size(off_t size);
+const char			*ls_fmt_size(t_ent *ent);
 const char			*ls_fmt_user(uid_t uid);
 const char			*ls_fmt_date(time_t epoch);
 const char			*ls_fmt_timeyear(time_t epoch);

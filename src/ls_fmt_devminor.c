@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_list.c                                         :+:      :+:    :+:   */
+/*   ls_fmt_devminor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 14:40:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 10:57:50 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/09 10:31:36 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/09 10:52:57 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-char	err_list(const char *path)
+const char	*ls_fmt_devminor(t_ent *ent)
 {
-	size_t	i;
+	static char	buffer[20];
 
-	i = ft_strlen(path);
-	while (i > 0 && path[i] != '/')
-		i -= 1;
-	if (path[i] == '/')
-		i += 1;
-	ft_dprintf(2, "ls: %s: %s\n", path + i, strerror(errno));
-	g_exit = 1;
-	return (1);
+	ls__naitoa(buffer, minor(ent->info.st_rdev));
+	return (buffer);
 }

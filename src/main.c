@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:53:45 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 19:20:28 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/09 10:25:02 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,6 @@ int		main(int argc, char **argv)
 	ls_init_config(&config);
 	ls_parse_args(argc, argv, &config);
 	ls_parse_targets(argc, argv, &tgt_cnt, &targets);
-
-	/*
-	ft_printf("sorter: ");
-	if (config.order == sort_name)
-		ft_printf("name\n");
-	else if (config.order == sort_size)
-		ft_printf("size\n");
-	else if (config.order == sort_accessed)
-		ft_printf("time accessed\n");
-	else if (config.order == sort_changed)
-		ft_printf("time changed\n");
-	else if (config.order == sort_created)
-		ft_printf("time created\n");
-	else if (config.order == sort_modified)
-		ft_printf("time modified\n");
-	else
-		ft_printf("wat\n");
-*/
-
 	if (tgt_cnt == 0)
 		ls_list(".", &config);
 	else

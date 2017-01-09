@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 16:50:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 16:54:14 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/09 10:50:49 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ls__genpad(t_ent **ent, t_lspad *pad, t_ls *conf)
 			ls_fmt_user(ent[i]->info.st_uid)));
 		pad->group = MAX(pad->group, ft_strlen(
 			ls_fmt_group(ent[i]->info.st_gid)));
-		pad->size = MAX(pad->size, ft_intlen(ent[i]->info.st_size));
+		pad->devmajor = MAX(pad->devmajor, ft_strlen(ls_fmt_devmajor(ent[i])));
+		pad->size = MAX(pad->size, ft_strlen(ls_fmt_size(ent[i])));
 		pad->timeyear = MAX(pad->timeyear, ft_strlen(
 			ls_fmt_timeyear(ls__propertime(ent[i], conf))));
 	}

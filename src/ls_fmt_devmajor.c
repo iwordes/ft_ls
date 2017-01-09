@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_list.c                                         :+:      :+:    :+:   */
+/*   ls_fmt_devmajor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/08 14:40:06 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 10:57:50 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/09 09:42:03 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/09 10:44:10 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-char	err_list(const char *path)
+const char	*ls_fmt_devmajor(t_ent *ent)
 {
-	size_t	i;
+	static char	buffer[23];
 
-	i = ft_strlen(path);
-	while (i > 0 && path[i] != '/')
-		i -= 1;
-	if (path[i] == '/')
-		i += 1;
-	ft_dprintf(2, "ls: %s: %s\n", path + i, strerror(errno));
-	g_exit = 1;
-	return (1);
+	if (!S_ISBLK(ent->info.st_mode) && !S_ISCHR(ent->info.st_mode))
+		return ("");
+	buffer[0] = ' ';
+	ls__naitoa(buffer + 1, major(ent->info.st_rdev));
+	ft_strcat(buffer, ", ");
+	return (buffer);
 }

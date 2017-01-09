@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 15:14:24 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 15:40:02 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/09 10:57:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	err_path(const char *path)
 {
-	ft_printf("ls: %s: %s\n", path, strerror(errno));
+	ft_dprintf(2, "ls: %s: %s\n", path, strerror(errno));
 	g_exit = 1;
 	return (1);
 }
