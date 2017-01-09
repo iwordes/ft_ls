@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 10:51:57 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/09 11:30:06 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void				ls_table_print(t_ent **table, t_ls *conf);
 void				ls_table_sort(t_ent **t, long (*c)(t_ent*, t_ent*), char r);
 void				ls_table_sort_adv(t_ent **t, long (*c1)(t_ent*, t_ent*),
 										long (*c2)(t_ent*, t_ent*), char r);
+
+void				ls_targets_sort(char **targets, int l);
 
 void				err_illegal_opt(const char *bin, char opt);
 char				err_list(const char *path);

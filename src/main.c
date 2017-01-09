@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:53:45 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 10:25:02 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/09 11:29:44 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		main(int argc, char **argv)
 	ls_init_config(&config);
 	ls_parse_args(argc, argv, &config);
 	ls_parse_targets(argc, argv, &tgt_cnt, &targets);
+	ls_targets_sort(targets, tgt_cnt);
 	if (tgt_cnt == 0)
 		ls_list(".", &config);
 	else

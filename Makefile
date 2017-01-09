@@ -39,7 +39,8 @@ SRC    += ls__genpad.c \
 		  ls_table_fmt.c \
 		  ls_table_print.c \
 		  ls_table_sort.c \
-		  ls_table_sort_adv.c
+		  ls_table_sort_adv.c \
+		  ls_targets_sort.c
 SRC    += sort_accessed.c \
 		  sort_changed.c \
 		  sort_created.c \
