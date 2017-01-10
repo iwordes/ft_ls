@@ -16,6 +16,8 @@ SRC    += ls__genpad.c \
 		  ls__naitoa.c \
 		  ls__sort.c \
 		  ls_create_ent.c \
+		  ls_destroy_ent.c \
+		  ls_destroy_table.c \
 		  ls_ent_print_detailed.c \
 		  ls_fmt_devmajor.c \
 		  ls_fmt_devminor.c \

@@ -6,14 +6,20 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 16:57:44 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 13:53:34 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
+#define VALDIR__1(E) LS_ISDIR(E)
+#define VALDIR__2(E) (!conf->detailed && LS_ISLNK(E) && fs_isdir(E->qual_link))
+#define VALID_DIR(ENT) (VALDIR__1(ENT) || VALDIR__2(ENT))
+
 static t_ent	**ents_from_targets(char **raw, unsigned l, t_ls *conf)
 {
+	char		*basename;
+	char		*dirname;
 	t_ent		**table;
 	unsigned	col;
 	unsigned	i;
@@ -22,8 +28,16 @@ static t_ent	**ents_from_targets(char **raw, unsigned l, t_ls *conf)
 	col = 0;
 	LS_MGUARD(table = (t_ent**)malloc(sizeof(void*) * (l + 1)));
 	while ((i += 1) < l)
-		if ((table[col++] = ls_create_ent("", ft_strdup(raw[i]), conf)) == NULL)
+	{
+		LS_MGUARD(dirname = fs_dirname(raw[i]));
+		LS_MGUARD(basename = fs_basename(raw[i]));
+		if ((table[col++] = ls_create_ent(dirname, basename, conf)) == NULL)
 			(col--) && err_path(raw[i]);
+		else
+			LS_MGUARD(table[col - 1]->name = ft_strdup(raw[i]));
+		free(basename);
+		free(dirname);
+	}
 	table[col] = NULL;
 	return (table);
 }
@@ -43,7 +57,7 @@ static void	ldir__(t_ent **dir, t_ent **table, t_ls *conf)
 	d = 0;
 	i = ~0;
 	while (table[i += 1] != NULL)
-		if (S_ISDIR(table[i]->info.st_mode))
+		if (VALID_DIR(table[i]))
 			dir[d++] = table[i];
 	dir[d] = NULL;
 	ls_table_sort(dir, sort_name, FALSE);
@@ -51,11 +65,11 @@ static void	ldir__(t_ent **dir, t_ent **table, t_ls *conf)
 	while (dir[i += 1] != NULL)
 	{
 		(i != 0) && write(1, "\n", 1);
-		ls_list(dir[i]->name, conf) || err_list(dir[i]->name);
+		if (!LS_ISLNK(dir[i]))
+			ls_list(dir[i]->name, conf) || err_list(dir[i]->name);
+		else
+			ls_list(dir[i]->qual_link, conf) || err_list(dir[i]->name);
 	}
-	i = ~0;
-	while (dir[i += 1] != NULL)
-		free(dir[i]);
 }
 
 static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
@@ -67,7 +81,7 @@ static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
 	f = 0;
 	i = ~0;
 	while (table[i += 1] != NULL)
-		if (!S_ISDIR(table[i]->info.st_mode))
+		if (!VALID_DIR(table[i]))
 			file[f++] = table[i];
 	file[f] = NULL;
 	ls_table_sort(file, conf->order, conf->sort_rev);
@@ -81,9 +95,6 @@ static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
 	else
 		while (file[i += 1] != NULL)
 			ft_printf("%s\n", file[i]->name);
-	i = ~0;
-	while (file[i += 1] != NULL)
-		free(file[i]);
 }
 
 void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
@@ -98,17 +109,19 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	l = 0;
 	i = ~0;
 	while (table[i += 1] != NULL)
-		(!S_ISDIR(table[i]->info.st_mode)) && (l += 1);
+		if (!VALID_DIR(table[i]))
+			l += 1;
 	LS_MGUARD(file = (t_ent**)malloc(sizeof(void*) * (l + 1)));
 	lfile__(file, table, conf);
 	l = 0;
 	i = ~0;
 	while (table[i += 1] != NULL)
-		(S_ISDIR(table[i]->info.st_mode)) && (l += 1);
+		if (VALID_DIR(table[i]))
+			l += 1;
 	LS_MGUARD(dir = (t_ent**)malloc(sizeof(void*) * (l + 1)));
 	(l > 0 && file[0] != NULL) && write(1, "\n", 1);
 	ldir__(dir, table, conf);
-	free(dir);
-	free(file);
+	ls_destroy_table(file);
+	ls_destroy_table(dir);
 	free(table);
 }

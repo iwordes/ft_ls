@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 11:30:06 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 10:27:44 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define LS_DEVMAJ(D) (((D) >> 8) & 0x7F)
 # define LS_DEVMIN(D) ((D) & 0xFF)
 
+# define LS_ISBLK(ENT) (S_ISBLK(ENT->info.st_mode))
+# define LS_ISCHR(ENT) (S_ISCHR(ENT->info.st_mode))
+# define LS_ISDIR(ENT) (S_ISDIR(ENT->info.st_mode))
+# define LS_ISFIFO(ENT) (S_ISFIFO(ENT->info.st_mode))
+# define LS_ISLNK(ENT) (S_ISLNK(ENT->info.st_mode))
+# define LS_ISREG(ENT) (S_ISREG(ENT->info.st_mode))
+# define LS_ISSOCK(ENT) (S_ISSOCK(ENT->info.st_mode))
+
 typedef enum		e_time
 {
 	time_modified,
@@ -59,7 +67,8 @@ typedef struct		s_lspad
 typedef struct		s_ent
 {
 	char			*name;
-	char			*link_to;
+	char			*raw_link;
+	char			*qual_link;
 	struct stat		info;
 	char			has_xattr;
 }					t_ent;
@@ -88,6 +97,9 @@ void				ls__genpad(t_ent **ent, t_lspad *pad, t_ls *conf);
 time_t				ls__propertime(t_ent *ent, t_ls *conf);
 void				ls__naitoa(char buffer[20], uintmax_t integer);
 void				ls__sort(t_ent **e, int (*cmp)(t_ent*, t_ent*), char rev);
+
+void				ls_destroy_ent(t_ent *ent);
+void				ls_destroy_table(t_ent **table);
 
 void				ls_ent_print_detailed(t_ent *ent, t_lspad *pad, t_ls *conf);
 

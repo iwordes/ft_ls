@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 13:45:46 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/07 09:09:24 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 10:15:41 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ const char		*ls_fmt_name(t_ent *ent, t_ls *conf)
 	static char	buffer[2048];
 	char		color;
 
-	if (!conf->colorize && ent->link_to == NULL)
+	if (!conf->colorize && ent->raw_link == NULL)
 		return (ent->name);
 	color = FALSE;
 	buffer[0] = 0;
@@ -49,10 +49,10 @@ const char		*ls_fmt_name(t_ent *ent, t_ls *conf)
 	ft_strcat(buffer, ent->name);
 	if (color)
 		ft_strcat(buffer, "\e[0m");
-	if (conf->detailed && ent->link_to != NULL)
+	if (conf->detailed && ent->raw_link != NULL)
 	{
 		ft_strcat(buffer, " -> ");
-		ft_strcat(buffer, ent->link_to);
+		ft_strcat(buffer, ent->raw_link);
 	}
 	return (buffer);
 }
