@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:34:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 09:33:53 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 10:14:12 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,15 @@ t_ent			*ls_create_ent(const char *path, char *child, t_ls *conf)
 		return (NULL);
 	}
 	ent->name = child;
-	ent->link_to = NULL;
-	if (conf->detailed && S_ISLNK(ent->info.st_mode))
-		LS_MGUARD(ent->link_to = ft_strdup(fs_readlink(qual_path)));
-	ent->has_xattr = (listxattr(qual_path, NULL, 0, 0) > 0);
+	ent->raw_link = NULL;
+	ent->qual_link = NULL;
+	if (S_ISLNK(ent->info.st_mode))
+	{
+		LS_MGUARD(ent->qual_link = fs_join(path, fs_readlink(qual_path)));
+		LS_MGUARD(ent->raw_link = ft_strdup(fs_readlink(qual_path)));
+	}
+	ent->has_xattr = (listxattr(qual_path, NULL, 0, XATTR_NOFOLLOW) > 0);
 	free(qual_path);
 	return (ent);
+	(void)conf;
 }
