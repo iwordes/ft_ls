@@ -6,15 +6,11 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 10:02:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 20:08:12 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:05:25 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-/*
-**
-*/
 
 void			ls_table_fmt(const char *parent, t_ent **table, t_ls *conf)
 {

@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 18:37:21 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:05:52 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_ent	**ents_from_targets(char **raw, unsigned l)
 ** If conf->recurse is enabled, print all subdirectories, too.
 */
 
-static void	ldir__(t_ent **dir, t_ent **table, t_ls *conf)
+static void		ldir__(t_ent **dir, t_ent **table, t_ls *conf)
 {
 	unsigned	d;
 	unsigned	i;
@@ -67,7 +67,7 @@ static void	ldir__(t_ent **dir, t_ent **table, t_ls *conf)
 	}
 }
 
-static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
+static void		lfile__(t_ent **file, t_ent **table, t_ls *conf)
 {
 	unsigned	f;
 	unsigned	i;
@@ -92,7 +92,7 @@ static void	lfile__(t_ent **file, t_ent **table, t_ls *conf)
 			ft_printf("%s\n", file[i]->name);
 }
 
-void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
+void			ls_list_targets(char **targets, unsigned t, t_ls *conf)
 {
 	t_ent		**table;
 	t_ent		**file;

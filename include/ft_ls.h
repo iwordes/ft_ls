@@ -6,15 +6,9 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 18:20:02 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:05:06 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO NOTE TODO: CHANGE THIS!!! TODO NOTE TODO NOTE NOTE TODO
-#include                <stdio.h>
-
-
-
 
 #ifndef FT_LS_H
 # define FT_LS_H

@@ -6,14 +6,13 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 09:51:22 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/06 16:08:09 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:03:50 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-static char	*g_swc =
-	"1AGRSU" "acilrtu";
+static char	*g_swc = "1AGRSU" "acilrtu";
 
 static void	(*g_swf[])(t_ls*) =
 {
