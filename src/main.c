@@ -6,13 +6,12 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 12:53:45 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/11 09:55:49 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/11 12:19:23 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-char	*g_name;
 int		g_exit = 0;
 
 int		main(int argc, char **argv)
@@ -21,7 +20,6 @@ int		main(int argc, char **argv)
 	int				tgt_cnt;
 	char			**targets;
 
-	g_name = argv[0];
 	ls_init_config(&config);
 	ls_parse_args(argc, argv, &config);
 	ls_parse_targets(argc, argv, &tgt_cnt, &targets);

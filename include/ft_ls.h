@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/11 09:58:29 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/11 12:19:11 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ void				sw_sort_reverse(t_ls *cfg);
 void				sw_sort_size(t_ls *cfg);
 void				sw_sort_modified(t_ls *cfg);
 
-extern char			*g_name;
 extern int			g_exit;
 
 #endif
