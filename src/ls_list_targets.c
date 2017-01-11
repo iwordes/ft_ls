@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 13:53:34 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 15:47:01 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ static void	ldir__(t_ent **dir, t_ent **table, t_ls *conf)
 	while (dir[i += 1] != NULL)
 	{
 		(i != 0) && write(1, "\n", 1);
-		if (!LS_ISLNK(dir[i]))
-			ls_list(dir[i]->name, conf) || err_list(dir[i]->name);
-		else
-			ls_list(dir[i]->qual_link, conf) || err_list(dir[i]->name);
+		ls_list(dir[i]->name, conf) || err_list(dir[i]->name);
 	}
 }
 
