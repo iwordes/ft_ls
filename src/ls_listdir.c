@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 16:44:52 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:17:12 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static char		name_qualifies_(char *name, t_ls *conf)
 /*
 ** Return a table of the contents of the given directory path.
 ** Does not return any entry that should not be included.
+*/
+/*
+** Might be optimized by not spending logic time to allocate less memory for
+** the entire table.
 */
 
 t_ent			**ls_listdir(const char *path, t_ls *conf)

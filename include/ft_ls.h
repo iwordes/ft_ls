@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 19:05:06 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:36:30 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char				ls_parse_switch(char sw, t_ls *config);
 void				ls_parse_targets(int argc, char **argv, int *t, char ***tg);
 
 void				ls_table_align(t_ent **table);
-void				ls_table_fmt(const char *parent, t_ent **table, t_ls *conf);
+void				ls_table_fmt(t_ent **table, t_ls *conf);
 void				ls_table_print(t_ent **table, t_ls *conf);
 void				ls_table_sort(t_ent **t, long (*c)(t_ent*, t_ent*), char r);
 void				ls_table_sort_adv(t_ent **t, long (*c1)(t_ent*, t_ent*),

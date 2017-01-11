@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/03 13:54:56 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 15:46:47 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 19:36:54 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char		ls_list(const char *path, t_ls *conf)
 	if ((table = ls_listdir(path, conf)) == NULL)
 		return (FALSE);
 	ls_table_sort(table, sort_name, conf->sort_rev);
-	ls_table_fmt(path, table, conf);
+	ls_table_fmt(table, conf);
 	i = ~0;
 	if (conf->recurse)
 		while (table[i += 1] != NULL)

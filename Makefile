@@ -68,13 +68,17 @@ all: $(NAME)
 
 .PHONY: clean
 clean:
-	rm -rf build
+	@echo No object files removed from ./build!
+	make clean -C libfs
+	make clean -C libft
 
 .PHONY: fclean
 fclean: clean
 	rm -f $(NAME)
 	rm -f lib/libfs.a
 	rm -f lib/libft.a
+	rm -f libfs/libfs.a
+	rm -f libft/libft.a
 
 .PHONY: re
 re: fclean all
