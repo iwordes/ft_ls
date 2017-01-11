@@ -6,19 +6,16 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 10:28:01 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/08 14:14:48 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 18:59:36 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-/*
-** Sort by time of last access.
-*/
+#define TIMEOF(E) E->info.st_atimespec
 
 long	sort_accessed(t_ent *e1, t_ent *e2)
 {
-	if (e1->info.st_atimespec.tv_sec != e2->info.st_atimespec.tv_sec)
-		return (e1->info.st_atimespec.tv_sec - e2->info.st_atimespec.tv_sec);
-	return (e1->info.st_atimespec.tv_nsec - e2->info.st_atimespec.tv_nsec);
+	if (TIMEOF(e1).tv_sec != TIMEOF(E2).tv_sec)
+		return (TIMEOF(e1).tv_sec - TIMEOF(e2).tv_sec);
+	return (TIMEOF(e1).tv_nsec - TIMEOF(e2).tv_nsec);
 }
