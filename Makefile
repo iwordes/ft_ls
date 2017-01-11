@@ -5,7 +5,7 @@ VERSION = 1.0.0
 CC      = gcc
 CF      = -Wall -Wextra -Werror
 CF     += -I include -I libfs/include -I libft/include
-CF     += -L lib -l fs -l ft
+CF     += -L libfs -L libft -l fs -l ft
 
 SRC     = main.c
 SRC    += debug_init.c
@@ -89,14 +89,11 @@ fclean: clean
 .PHONY: re
 re: fclean all
 
-$(NAME): lib/libfs.a lib/libft.a $(SRC)
-	@mkdir -p $(@D)
+$(NAME): libfs/libfs.a libft/libft.a $(SRC)
 	$(CC) $(CF) -o $@ $(SRC)
 
-lib/libfs.a:
+libfs/libfs.a:
 	make -C libfs
-	cp -f libfs/libfs.a lib/
 
-lib/libft.a:
+libft/libft.a:
 	make -C libft
-	cp -f libft/libft.a lib/
