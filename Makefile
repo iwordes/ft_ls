@@ -8,6 +8,7 @@ CF     += -I include -I libfs/include -I libft/include
 CF     += -L lib -l fs -l ft
 
 SRC     = main.c
+SRC    += debug_init.c
 SRC    += err_illegal_opt.c \
 		  err_list.c \
 		  err_path.c
@@ -71,6 +72,10 @@ clean:
 	@echo No object files removed from ./build!
 	make clean -C libfs
 	make clean -C libft
+
+.PHONY: debug
+debug: lib/libfs.a lib/libft.a $(SRC)
+	$(CC) $(CF) -D DEBUG -g -o $(NAME) $(SRC)
 
 .PHONY: fclean
 fclean: clean

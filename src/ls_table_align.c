@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 11:04:13 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 19:04:25 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/11 10:49:00 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@ static void	ls_table_align_1(t_ent **table)
 	size_t	i;
 
 	i = 0;
-	while (table[(i += 1)] != NULL)
+	while (table[i += 1] != NULL)
 	{
 		if (ft_strequ(table[i]->name, "."))
 		{
 			tmp = table[i];
-			while (i-- > 0)
-				table[i] = table[i + 1];
+			while (i > 0)
+			{
+				table[i] = table[i - 1];
+				i -= 1;
+			}
 			table[i] = tmp;
 			break ;
 		}
@@ -42,13 +45,16 @@ static void	ls_table_align_2(t_ent **table)
 	size_t	i;
 
 	i = 1;
-	while (table[(i += 1)] != NULL)
+	while (table[i += 1] != NULL)
 	{
 		if (ft_strequ(table[i]->name, ".."))
 		{
 			tmp = table[i];
-			while (i-- > 1)
-				table[i] = table[i + 1];
+			while (i > 1)
+			{
+				table[i] = table[i - 1];
+				i -= 1;
+			}
 			table[i] = tmp;
 			break ;
 		}
