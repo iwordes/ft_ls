@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 12:24:11 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 10:27:44 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 18:20:02 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ typedef struct		s_lspad
 typedef struct		s_ent
 {
 	char			*name;
-	char			*raw_link;
-	char			*qual_link;
+	char			*link;
 	struct stat		info;
 	char			has_xattr;
+	char			dirlink;
 }					t_ent;
 
 typedef struct		s_ls
@@ -116,7 +116,7 @@ const char			*ls_fmt_timeyear(time_t epoch);
 const char			*ls_fmt_name(t_ent *ent, t_ls *conf);
 
 void				ls_init_config(t_ls *config);
-t_ent				*ls_create_ent(const char *path, char *name, t_ls *conf);
+t_ent				*ls_create_ent(const char *path, char *name);
 char				ls_list(const char *path, t_ls *config);
 t_ent				**ls_listdir(const char *path, t_ls *conf);
 void				ls_list_targets(char **targets, unsigned t, t_ls *conf);

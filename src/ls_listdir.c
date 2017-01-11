@@ -6,27 +6,11 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 11:45:01 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 16:44:52 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-
-static t_ent	**panic_(char **child, t_ent **ent, unsigned l)
-{
-	unsigned	i;
-
-	i = 0;
-	while (i < l)
-		if (child[i] != (void*)1)
-			free(child[i++]);
-	free(child);
-	i = 0;
-	while (i < l && ent[i] != NULL)
-		free(ent[i++]);
-	free(ent);
-	return (NULL);
-}
 
 static char		name_qualifies_(char *name, t_ls *conf)
 {
@@ -36,32 +20,9 @@ static char		name_qualifies_(char *name, t_ls *conf)
 	return (TRUE);
 }
 
-static char	genloop_(const char *path, char **child, t_ent **table, t_ls *conf)
-{
-	unsigned	i;
-	unsigned	t;
-
-	i = ~0;
-	t = 0;
-	while (child[i += 1] != NULL)
-		if (!name_qualifies_(child[i], conf))
-		{
-			free(child[i]);
-			child[i] = (void*)1;
-		}
-		else if ((table[t++] = ls_create_ent(path, child[i], conf)) == NULL)
-			return (FALSE);
-	table[t] = NULL;
-	return (TRUE);
-}
-
 /*
-** Return a t_ent[] of the contents of the given directory path.
+** Return a table of the contents of the given directory path.
 ** Does not return any entry that should not be included.
-*/
-/*
-** TODO: Handle non-directories gracefully
-** TODO: Malloc less space if not necessary
 */
 
 t_ent			**ls_listdir(const char *path, t_ls *conf)
@@ -78,8 +39,14 @@ t_ent			**ls_listdir(const char *path, t_ls *conf)
 		if (name_qualifies_(child[i], conf))
 			l += 1;
 	LS_MGUARD(table = (t_ent**)malloc(sizeof(void*) * (l + 1)));
-	if (!genloop_(path, child, table, conf))
-		return (panic_(child, table, l));
+	l = 0;
+	i = ~0;
+	while (child[i += 1] != NULL)
+		if (!name_qualifies_(child[i], conf))
+			free(child[i]);
+		else
+			LS_MGUARD(table[l++] = ls_create_ent(path, child[i]));
+	table[l] = NULL;
 	free(child);
 	return (table);
 }

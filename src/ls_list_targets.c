@@ -6,17 +6,15 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 11:14:19 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 15:47:01 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 18:37:21 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-#define VALDIR__1(E) LS_ISDIR(E)
-#define VALDIR__2(E) (!conf->detailed && LS_ISLNK(E) && fs_isdir(E->qual_link))
-#define VALID_DIR(ENT) (VALDIR__1(ENT) || VALDIR__2(ENT))
+#define VALID_DIR(ENT) (LS_ISDIR(ENT) || (!conf->detailed && ENT->dirlink))
 
-static t_ent	**ents_from_targets(char **raw, unsigned l, t_ls *conf)
+static t_ent	**ents_from_targets(char **raw, unsigned l)
 {
 	char		*basename;
 	char		*dirname;
@@ -31,7 +29,7 @@ static t_ent	**ents_from_targets(char **raw, unsigned l, t_ls *conf)
 	{
 		LS_MGUARD(dirname = fs_dirname(raw[i]));
 		LS_MGUARD(basename = fs_basename(raw[i]));
-		if ((table[col++] = ls_create_ent(dirname, basename, conf)) == NULL)
+		if ((table[col++] = ls_create_ent(dirname, basename)) == NULL)
 			(col--) && err_path(raw[i]);
 		else
 			LS_MGUARD(table[col - 1]->name = ft_strdup(raw[i]));
@@ -102,7 +100,7 @@ void	ls_list_targets(char **targets, unsigned t, t_ls *conf)
 	unsigned	i;
 	unsigned	l;
 
-	LS_MGUARD(table = ents_from_targets(targets, t, conf));
+	LS_MGUARD(table = ents_from_targets(targets, t));
 	l = 0;
 	i = ~0;
 	while (table[i += 1] != NULL)

@@ -6,13 +6,13 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 13:34:33 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 10:14:12 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/10 18:36:29 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
 
-t_ent			*ls_create_ent(const char *path, char *child, t_ls *conf)
+t_ent			*ls_create_ent(const char *path, char *child)
 {
 	char	*qual_path;
 	t_ent	*ent;
@@ -26,15 +26,17 @@ t_ent			*ls_create_ent(const char *path, char *child, t_ls *conf)
 		return (NULL);
 	}
 	ent->name = child;
-	ent->raw_link = NULL;
-	ent->qual_link = NULL;
-	if (S_ISLNK(ent->info.st_mode))
+	if (LS_ISLNK(ent))
 	{
-		LS_MGUARD(ent->qual_link = fs_join(path, fs_readlink(qual_path)));
-		LS_MGUARD(ent->raw_link = ft_strdup(fs_readlink(qual_path)));
+		LS_MGUARD(ent->link = ft_strdup(fs_readlink(qual_path)));
+		ent->dirlink = fs_isdir(qual_path);
+	}
+	else
+	{
+		ent->link = NULL;
+		ent->dirlink = FALSE;
 	}
 	ent->has_xattr = (listxattr(qual_path, NULL, 0, XATTR_NOFOLLOW) > 0);
 	free(qual_path);
 	return (ent);
-	(void)conf;
 }

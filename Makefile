@@ -14,7 +14,6 @@ SRC    += err_illegal_opt.c \
 SRC    += ls__genpad.c \
 		  ls__propertime.c \
 		  ls__naitoa.c \
-		  ls__sort.c \
 		  ls_create_ent.c \
 		  ls_destroy_ent.c \
 		  ls_destroy_table.c \
@@ -73,18 +72,14 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	rm -rf bin
+	rm -f $(NAME)
 	rm -f lib/libfs.a
 	rm -f lib/libft.a
 
 .PHONY: re
 re: fclean all
 
-#.PHONY: $(NAME)
-$(NAME): bin/$(NAME)
-	cp -f $< $@
-
-bin/$(NAME): lib/libfs.a lib/libft.a $(SRC)
+$(NAME): lib/libfs.a lib/libft.a $(SRC)
 	@mkdir -p $(@D)
 	$(CC) $(CF) -o $@ $(SRC)
 
