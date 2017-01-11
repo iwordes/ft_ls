@@ -80,6 +80,7 @@ debug: lib/libfs.a lib/libft.a $(SRC)
 .PHONY: fclean
 fclean: clean
 	rm -f $(NAME)
+	@rm -rf $(NAME).dSYM
 	rm -f lib/libfs.a
 	rm -f lib/libft.a
 	rm -f libfs/libfs.a
