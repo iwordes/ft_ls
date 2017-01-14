@@ -74,7 +74,7 @@ clean:
 	make clean -C libft
 
 .PHONY: debug
-debug: lib/libfs.a lib/libft.a $(SRC)
+debug: libfs/libfs.a libft/libft.a $(SRC)
 	$(CC) $(CF) -D DEBUG -g -o $(NAME) $(SRC)
 
 .PHONY: fclean
