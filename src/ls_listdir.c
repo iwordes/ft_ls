@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:08:49 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/11 10:26:50 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/13 19:13:00 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ t_ent			**ls_listdir(const char *path, t_ls *conf)
 	while (child[i += 1] != NULL)
 		if (!name_qualifies_(child[i], conf))
 			free(child[i]);
-		else
-			LS_MGUARD(table[l++] = ls_create_ent(path, child[i]));
+		else if ((table[l++] = ls_create_ent(path, child[i])) == NULL)
+		{
+			err_path(child[i]);
+			l -= 1;
+		}
 	table[l] = NULL;
 	free(child);
 	return (table);
