@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 09:18:52 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/15 18:39:11 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/15 18:40:23 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ const char	*ls_fmt_timeyear(time_t epoch)
 	time_t		now;
 
 	now = time(NULL);
-	if (epoch >= (now - SEC_IN_6MO) && epoch <= (now + SEC_IN_6MO))
+	if (epoch > (now - SEC_IN_6MO) && epoch < (now + SEC_IN_6MO))
 	{
 		ft_strncpy(buffer, ctime(&epoch) + 11, 5);
 		buffer[6] = 0;
