@@ -6,12 +6,12 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 09:18:52 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/15 16:12:14 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/15 16:23:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ls.h>
-#define SEC_IN_YEAR 31556926
+#define SEC_IN_YEAR (86400 * 365)
 #define SEC_IN_6MO (SEC_IN_YEAR / 2)
 
 static void	year_(char buffer[20], char *stamp)
