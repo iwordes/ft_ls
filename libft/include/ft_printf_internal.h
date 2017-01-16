@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 10:50:09 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 19:09:16 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/15 12:30:07 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define PF_OCT(X) ((X) == 'o' || (X) == 'O')
 # define PF_NUM(X) (PF_DEC(X) || PF_HEX(X) || PF_OCT(X))
 
-# define PF_FAILIF(COND) if (COND) return (-l[2])
+# define PF_FAILIF(COND) if (COND) return ((l[2] == 0) ? ~0L : -l[2])
 
 typedef struct	s_printer
 {

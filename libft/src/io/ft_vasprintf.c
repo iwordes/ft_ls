@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 08:18:01 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/09 16:27:15 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/15 13:51:56 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ static ssize_t	get_conv_segment(char **string, const char **fmt,
 	while (printer.arg-- != 0)
 		va_arg(arg, int);
 	ft_asprintf_parse(fmt, arg, &printer);
-	*a += printer.stars;
 	if (printer.conv == 0)
 	{
-		va_end(arg);
-		return (-1);
+		*string = ft_strnew(0);
+		return (0);
 	}
+	*a += printer.stars;
 	length = ft_asprintf_dispatch(string, arg, a, &printer);
 	va_end(arg);
 	return (length);
@@ -110,7 +110,7 @@ int				ft_vasprintf(char **string, const char *fmt, va_list args)
 			free(seg[0]);
 		PF_FAILIF(l[1] < 0);
 		if ((seg[0] = ft_asprintf_segdjoin(seg[0], seg[1], l[0], l[1])) == NULL)
-			return (-l[2]);
+			return ((l[2] == 0) ? ~0L : -l[2]);
 		seg[1] = ft_asprintf_segjoin(*string, seg[0], l[2], l[0] + l[1]);
 		free(seg[0]);
 		PF_FAILIF(seg[1] == NULL);

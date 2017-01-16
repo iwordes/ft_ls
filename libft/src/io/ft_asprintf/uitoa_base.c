@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/11 18:53:00 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/10 14:59:14 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/15 13:35:25 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ static size_t	intsize(uintmax_t integer, uint8_t base, t_printer *p)
 			alt_space += 1;
 		alt_space = MAX(alt_space, 0);
 	}
-	if (p->group)
+	if (p->group && l % 3 == 0)
+		l += (l / 3) - 1;
+	else if (p->group)
 		l += l / 3;
 	if (p->prec > 0)
 		l = MAX((size_t)p->prec, l);

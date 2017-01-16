@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getline.h                                       :+:      :+:    :+:   */
+/*   ft_getinput.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/30 13:10:02 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/11 12:39:37 by iwordes          ###   ########.fr       */
+/*   Created: 2017/01/11 12:28:07 by iwordes           #+#    #+#             */
+/*   Updated: 2017/01/11 12:34:28 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_GETLINE_H
-# define FT_GETLINE_H
+#include <libft.h>
 
 /*
-** Added: 1.2.0
+** Return one line from stdinput.
 */
 
-typedef struct		s_getln
+char	*ft_getinput(const char *prompt)
 {
-	int				fd;
-	ssize_t			index;
-	ssize_t			limit;
-	char			buffer[4096];
-	struct s_getln	*next;
-}					t_getln;
+	char	*line;
 
-ssize_t				ft_getline(const int fd, char **const line);
-char				*ft_getinput(const char *prompt);
-
-#endif
+	ft_putstr(prompt);
+	ft_getline(0, &line);
+	return (line);
+}
