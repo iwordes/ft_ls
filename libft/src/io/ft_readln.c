@@ -6,7 +6,7 @@
 /*   By: iwordes <iwordes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 15:58:37 by iwordes           #+#    #+#             */
-/*   Updated: 2017/01/16 16:07:07 by iwordes          ###   ########.fr       */
+/*   Updated: 2017/01/16 17:46:14 by iwordes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,6 @@
 /*
 ** TODO: Refactor, expand, and make this more readable.
 */
-
-static void		ft_readln_body(t_getln *g, char **const l, size_t c, size_t *t);
-
-int				ft_readln(const int fd, char **const line)
-{
-	static t_getln	head;
-	t_getln			*current;
-	size_t			total;
-
-	if (fd < 0 || line == NULL)
-		return (-1);
-	current = &head;
-	*line = ft_strnew(0);
-	while (current->fd != fd && current->next != NULL)
-		current = current->next;
-	if (current->fd != fd)
-	{
-		current->next = ft_memalloc(sizeof(t_getln));
-		current = current->next;
-		current->fd = fd;
-	}
-	ft_readln_body(current, line, 1, &total);
-	if (current->limit >= 0 && *line != NULL)
-		return (current->limit > 0);
-	else
-		return (-1);
-}
 
 static void		ft_readln_body(t_getln *getln, char **const line,
 								size_t cache_size, size_t *total)
@@ -76,4 +49,29 @@ static void		ft_readln_body(t_getln *getln, char **const line,
 	}
 	if (*total > 0 && *line != NULL)
 		(*line)[*total] = 0;
+}
+
+int				ft_readln(const int fd, char **const line)
+{
+	static t_getln	head;
+	t_getln			*current;
+	size_t			total;
+
+	if (fd < 0 || line == NULL)
+		return (-1);
+	current = &head;
+	*line = ft_strnew(0);
+	while (current->fd != fd && current->next != NULL)
+		current = current->next;
+	if (current->fd != fd)
+	{
+		current->next = ft_memalloc(sizeof(t_getln));
+		current = current->next;
+		current->fd = fd;
+	}
+	ft_readln_body(current, line, 1, &total);
+	if (current->limit >= 0 && *line != NULL)
+		return (current->limit > 0);
+	else
+		return (-1);
 }
